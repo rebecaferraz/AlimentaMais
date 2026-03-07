@@ -24,7 +24,7 @@ Aplicação web para gestão nutricional que conecta nutricionistas e pacientes,
 #### 📄 Histórias de Usuário
 [Clique aqui para acessar o documento de histórias de usuário](https://docs.google.com/document/d/1L_HgO1RpaM8HjgqgyjmdYe_5D2p69a1GbW1iN-cltrA/edit?usp=sharing)
 
-### 🎨 Protótipo Lo-Fi (Figma)
+#### 🎨 Protótipo Lo-Fi (Figma)
 *(Link)*
 
 #### 🎥 Screencast do Protótipo Lo-Fi
@@ -35,4 +35,12 @@ Aplicação web para gestão nutricional que conecta nutricionistas e pacientes,
 
 #### 📋 Backlog do Produto (JIRA)
 *(Print)*
+
+## 🛠️ Tecnologias
+
+- **Back-end:** Python + Django
+- **Banco de dados:** SQLite (desenvolvimento) / PostgreSQL (produção)
+- **Front-end:** HTML, CSS, JavaScript
+- **Deploy:** Azure
+- **Versionamento:** Git + GitHub
 
