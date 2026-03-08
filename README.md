@@ -31,10 +31,10 @@ Aplicação web para gestão nutricional que conecta nutricionistas e pacientes,
 *(Link)*
 
 #### 📌 Quadro da Sprint (JIRA)
-<img src="imagens/sprint.png.jpeg" width="600">
+<img src="quadrosprint.png" width="800">
 
 #### 📋 Backlog do Produto (JIRA)
-*(Print)*
+<img src="backlog.jpeg" width="800">
 
 ## 🛠️ Tecnologias
 
