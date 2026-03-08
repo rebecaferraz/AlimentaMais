@@ -7,7 +7,7 @@ Aplicação web para gestão nutricional que conecta nutricionistas e pacientes,
 <table>
   <tr>
     <td align="center"><a href="https://github.com/Lauravi354"><b>Laura Alves</b></a></td>
-    <td align="center"><a href="https://github.com/luisamagalhaess"><b>Luisa Magalhães</b></a></td>
+    <td align="center"><a href="https://github.com/luisamagalhaess"><b>Luísa Magalhães</b></a></td>
     <td align="center"><a href="https://github.com/malucoelho"><b>Maria Luiza Coelho</b></a></td>
   </tr>
   <tr>
@@ -25,7 +25,7 @@ Aplicação web para gestão nutricional que conecta nutricionistas e pacientes,
 [Clique aqui para acessar o documento de histórias de usuário](https://docs.google.com/document/d/1L_HgO1RpaM8HjgqgyjmdYe_5D2p69a1GbW1iN-cltrA/edit?usp=sharing)
 
 #### 🎨 Protótipo Lo-Fi (Figma)
-*(Link)*
+[Clique aqui para acessar o protótipo Lo-Fi no Figma](https://www.figma.com/community/file/1612289552402822938/lo-fi-login-cadastro-de-paciente)
 
 #### 🎥 Screencast do Protótipo Lo-Fi
 *(Link)*
