@@ -36,7 +36,7 @@ Aplicação web para gestão nutricional que conecta nutricionistas e pacientes,
 #### 📋 Backlog do Produto (JIRA)
 <img src="backlog.jpeg" width="800">
 
-#### 🗂️ Board JIRA
+#### 🗂️ JIRA
 [Clique aqui para acessar o JIRA](https://cesar-team-ko4t55oe.atlassian.net/jira/software/projects/SCRUM/boards/1)
 
 ## 🛠️ Tecnologias
