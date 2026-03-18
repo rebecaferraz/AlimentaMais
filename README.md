@@ -28,7 +28,7 @@ Aplicação web para gestão nutricional que conecta nutricionistas e pacientes,
 [Clique aqui para acessar o protótipo Lo-Fi no Figma](https://www.figma.com/community/file/1612289552402822938/lo-fi-login-cadastro-de-paciente)
 
 #### 🎥 Screencast do Protótipo Lo-Fi
-[Clique aqui para acessar o screencast do Protótipo Lo-Fi](https://www.youtube.com/watch?v=r7Vz9kTxTSA)
+[Clique aqui para acessar o screencast do Protótipo Lo-Fi](https://www.youtube.com/watch?v=oniXMrVcW00)
 
 #### 📌 Quadro da Sprint (JIRA)
 <img src="quadrosprint2.png" width="800">
