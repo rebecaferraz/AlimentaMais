@@ -46,4 +46,3 @@ Aplicação web para gestão nutricional que conecta nutricionistas e pacientes,
 - **Front-end:** HTML, CSS, JavaScript
 - **Deploy:** Azure
 - **Versionamento:** Git + GitHub
-
