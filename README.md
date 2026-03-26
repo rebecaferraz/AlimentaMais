@@ -39,8 +39,35 @@ Aplicação web para gestão nutricional que conecta nutricionistas e pacientes,
 #### 🗂️ JIRA
 [Clique aqui para acessar o JIRA](https://cesar-team-ko4t55oe.atlassian.net/jira/software/projects/SCRUM/boards/1)
 
-## 🛠️ Tecnologias
+### Entrega 02 | Implementação e Deploy
+ 
+#### 🖥️ Histórias Implementadas
+- H1: Cadastro de Paciente
+- H2: Cadastro de Nutricionista
+- H3: Criar Plano Alimentar
+ 
+#### 🌐 Deploy em Produção (Azure)
+*(Link de acesso a ser adicionado)*
+ 
+*(Instruções de acesso a serem adicionadas)*
+ 
+#### 🎥 Screencast do Sistema
+*(Link do YouTube a ser adicionado)*
+ 
+#### 🔀 Programação em Par
+*(Link ou relato a ser adicionado)*
+ 
+#### 🐛 Issue/Bug Tracker (GitHub)
+*(Print a ser adicionado)*
+ 
+#### 📌 Quadro da Sprint 02 (JIRA)
+*(Print a ser adicionado)*
+ 
+#### 📋 Backlog Atualizado (JIRA)
+*(Print a ser adicionado)*
 
+## 🛠️ Tecnologias
+ 
 - **Back-end:** Python + Django
 - **Banco de dados:** SQLite (desenvolvimento) / PostgreSQL (produção)
 - **Front-end:** HTML, CSS, JavaScript
