@@ -59,7 +59,7 @@ Aplicação web para gestão nutricional que conecta nutricionistas e pacientes,
 *(Link do YouTube a ser adicionado)*
  
 #### 🔀 Programação em Par
-A programação em par foi realizada durante calls no Discord, onde uma integrante atuava como driver e outra como navigator.
+A programação em par foi realizada durante calls no Discord, onde uma integrante atuava como driver (Malu) e outra como navigator (Rebeca).
 
 <img src="assets/pair.png" width="800">
 
