@@ -1,0 +1,281 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Nutricionista · Alimenta+</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --g9:    #1B4D2E;
+      --g7:    #2a6b42;
+      --g2:    #b8dfc8;
+      --g1:    #e8f5ee;
+      --gold:  #C5A059;
+      --goldd: #9a7b3e;
+      --ink:   #1A1A1A;
+      --muted: #6b7280;
+      --off:   #F5F5F5;
+      --white: #ffffff;
+      --r:     12px;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--off);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    .navbar {
+      background: var(--g9);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .navbar-brand {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: .15em;
+    }
+
+    .navbar-brand span { color: var(--gold); }
+
+    .navbar-user {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: rgba(255,255,255,.8);
+      font-size: .78rem;
+    }
+
+    .btn-logout {
+      background: rgba(255,255,255,.1);
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 6px;
+      padding: .4rem .9rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background .15s;
+    }
+
+    .btn-logout:hover { background: rgba(255,255,255,.2); }
+
+    .container {
+      max-width: 960px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+    }
+
+    .page-header h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .page-header p {
+      font-size: .82rem;
+      color: var(--muted);
+      margin-top: .3rem;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      padding: .7rem 1.4rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background .15s;
+      white-space: nowrap;
+    }
+
+    .btn-primary:hover { background: var(--goldd); }
+
+    .section-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 1rem;
+      padding-bottom: .5rem;
+      border-bottom: 2px solid var(--g2);
+    }
+
+    /* TABELA DE PACIENTES */
+    .table-wrapper {
+      background: var(--white);
+      border-radius: var(--r);
+      border: 1px solid rgba(27,77,46,.1);
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      background: var(--g1);
+      color: var(--g9);
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .75rem 1rem;
+      text-align: left;
+    }
+
+    td {
+      padding: .85rem 1rem;
+      font-size: .8rem;
+      color: var(--ink);
+      border-top: 1px solid rgba(0,0,0,.05);
+    }
+
+    tr:hover td { background: var(--off); }
+
+    .badge {
+      display: inline-block;
+      background: var(--g1);
+      color: var(--g9);
+      font-size: .6rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: .2rem .55rem;
+      border-radius: 99px;
+      border: 1px solid var(--g2);
+    }
+
+    .empty-state {
+      background: var(--white);
+      border-radius: var(--r);
+      border: 1px dashed var(--g2);
+      padding: 2.5rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: .82rem;
+      margin-bottom: 2rem;
+    }
+
+    .empty-state .empty-icon {
+      font-size: 2rem;
+      margin-bottom: .75rem;
+    }
+
+    /* MENSAGENS */
+    .messages { margin-bottom: 1.2rem; }
+
+    .msg {
+      padding: .65rem .9rem;
+      border-radius: 8px;
+      font-size: .78rem;
+      font-weight: 500;
+      margin-bottom: .5rem;
+    }
+
+    .msg-error   { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
+    .msg-success { background: var(--g1); color: var(--g9); border: 1px solid var(--g2); }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-brand">ALIMENTA<span>+</span></div>
+  <div class="navbar-user">
+    Nutricionista {{ nutricionista.nome }}
+    <a href="{% url 'login' %}" class="btn-logout">Sair</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  {% if messages %}
+  <div class="messages">
+    {% for message in messages %}
+      <div class="msg {% if message.tags == 'error' %}msg-error{% else %}msg-success{% endif %}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="page-header">
+    <div>
+      <h1>Painel do Nutricionista</h1>
+      <p>CRN: {{ nutricionista.crn }} &nbsp;·&nbsp; {{ pacientes.count }} paciente{{ pacientes.count|pluralize }}</p>
+    </div>
+    <a href="{% url 'criar_plano' %}" class="btn-primary">+ Novo Plano</a>
+  </div>
+
+  <!-- LISTA DE PACIENTES -->
+  <div class="section-title">Pacientes Cadastrados</div>
+
+  {% if pacientes %}
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>E-mail</th>
+          <th>Idade</th>
+          <th>Peso</th>
+          <th>Altura</th>
+          <th>Objetivo</th>
+          <th>Planos</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in pacientes %}
+        <tr>
+          <td><strong>{{ p.nome }}</strong></td>
+          <td>{{ p.email }}</td>
+          <td>{{ p.idade }} anos</td>
+          <td>{{ p.peso }} kg</td>
+          <td>{{ p.altura }} m</td>
+          <td>{{ p.objetivo }}</td>
+          <td><span class="badge">{{ p.planos.count }} plano{{ p.planos.count|pluralize }}</span></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <div class="empty-icon">👥</div>
+    <div>Nenhum paciente cadastrado ainda.</div>
+  </div>
+  {% endif %}
+
+</div>
+
+</body>
+</html>
