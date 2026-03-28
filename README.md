@@ -64,7 +64,7 @@ Aplicação web para gestão nutricional que conecta nutricionistas e pacientes,
 <img src="assets/sprint2.jpeg" width="800">
  
 #### 📋 Backlog Atualizado (JIRA)
-*(Print a ser adicionado)*
+<img src="assets/backlog3.jpeg" width="800">
 
 ## 🛠️ Tecnologias
  
