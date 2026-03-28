@@ -31,10 +31,10 @@ Aplicação web para gestão nutricional que conecta nutricionistas e pacientes,
 [Clique aqui para acessar o screencast do Protótipo Lo-Fi](https://www.youtube.com/watch?v=oniXMrVcW00)
 
 #### 📌 Quadro da Sprint (JIRA)
-<img src="quadrosprint2.png" width="800">
+<img src="assets/quadrosprint2.png" width="800">
 
 #### 📋 Backlog do Produto (JIRA)
-<img src="backlog2.png" width="800">
+<img src="assets/backlog2.png" width="800">
 
 #### 🗂️ JIRA
 [Clique aqui para acessar o JIRA](https://cesar-team-ko4t55oe.atlassian.net/jira/software/projects/SCRUM/boards/1)
@@ -61,7 +61,7 @@ Aplicação web para gestão nutricional que conecta nutricionistas e pacientes,
 *(Print a ser adicionado)*
  
 #### 📌 Quadro da Sprint 02 (JIRA)
-<img src="sprint2.jpeg" width="800">
+<img src="assets/sprint2.jpeg" width="800">
  
 #### 📋 Backlog Atualizado (JIRA)
 *(Print a ser adicionado)*
