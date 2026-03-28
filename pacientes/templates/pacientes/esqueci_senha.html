@@ -1,0 +1,40 @@
+{% extends 'pacientes/base.html' %}
+{% block title %}Redefinir senha · Alimenta+{% endblock %}
+
+{% block content %}
+
+<div class="card-badge">Recuperação</div>
+<h2>Redefinir senha</h2>
+
+{% if passo == 1 %}
+<p class="card-sub">Informe o e-mail da sua conta para criar uma nova senha.</p>
+
+<form method="POST" action="{% url 'esqueci_senha' %}">
+  {% csrf_token %}
+
+  <div class="form-group">
+    <label for="email">E-mail</label>
+    <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+  </div>
+
+  <button type="submit" class="btn">Continuar</button>
+</form>
+
+{% else %}
+<p class="card-sub">Olá! Crie uma nova senha para <strong>{{ email }}</strong>.</p>
+
+<form method="POST" action="{% url 'esqueci_senha' %}">
+  {% csrf_token %}
+
+  <div class="form-group">
+    <label for="nova_senha">Nova senha</label>
+    <input type="password" id="nova_senha" name="nova_senha" placeholder="Mínimo 8 caracteres" required minlength="8">
+  </div>
+
+  <button type="submit" class="btn">Redefinir senha</button>
+</form>
+{% endif %}
+
+<p class="link-row">Lembrou a senha? <a href="{% url 'login' %}">Voltar ao login</a></p>
+
+{% endblock %}

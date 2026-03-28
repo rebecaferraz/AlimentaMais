@@ -147,3 +147,60 @@ def criar_plano(request):
         return redirect('painel_nutricionista')
  
     return render(request, 'pacientes/criar_plano.html', {'pacientes': pacientes})
+
+
+# ESQUECI MINHA SENHA
+def esqueci_senha(request):
+    # Passo 2: o e-mail já foi validado — agora o usuário define a nova senha
+    email_validado = request.session.get('reset_email')
+    tipo_validado = request.session.get('reset_tipo')
+
+    if email_validado and request.method == 'POST' and 'nova_senha' in request.POST:
+        nova_senha = request.POST.get('nova_senha', '')
+
+        if len(nova_senha) < 8:
+            messages.error(request, 'A senha precisa ter pelo menos 8 caracteres.')
+            return render(request, 'pacientes/esqueci_senha.html', {
+                'passo': 2, 'email': email_validado,
+            })
+
+        # Atualiza a senha no model correto
+        if tipo_validado == 'paciente':
+            Paciente.objects.filter(email=email_validado).update(senha=nova_senha)
+        else:
+            Nutricionista.objects.filter(email=email_validado).update(senha=nova_senha)
+
+        # Limpa a sessão de reset
+        del request.session['reset_email']
+        del request.session['reset_tipo']
+
+        messages.success(request, 'Senha redefinida com sucesso! Faça login com a nova senha.')
+        return redirect('login')
+
+    # Passo 1: pedir o e-mail
+    if request.method == 'POST' and 'email' in request.POST:
+        email = request.POST.get('email', '').strip()
+
+        paciente = Paciente.objects.filter(email=email).first()
+        if paciente:
+            request.session['reset_email'] = email
+            request.session['reset_tipo'] = 'paciente'
+            return render(request, 'pacientes/esqueci_senha.html', {
+                'passo': 2, 'email': email,
+            })
+
+        nutri = Nutricionista.objects.filter(email=email).first()
+        if nutri:
+            request.session['reset_email'] = email
+            request.session['reset_tipo'] = 'nutricionista'
+            return render(request, 'pacientes/esqueci_senha.html', {
+                'passo': 2, 'email': email,
+            })
+
+        messages.error(request, 'Nenhuma conta encontrada com esse e-mail.')
+
+    # Limpa sessão de reset caso o usuário volte ao passo 1
+    request.session.pop('reset_email', None)
+    request.session.pop('reset_tipo', None)
+
+    return render(request, 'pacientes/esqueci_senha.html', {'passo': 1})
