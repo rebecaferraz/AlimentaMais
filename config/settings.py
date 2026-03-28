@@ -10,6 +10,7 @@ ALLOWED_HOSTS = [
     'alimentamais.azurewebsites.net',
     'localhost',
     '127.0.0.1',
+    'alimentamais-production.up.railway.app',
 ]
  
 INSTALLED_APPS = [
