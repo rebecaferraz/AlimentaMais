@@ -61,7 +61,7 @@ Aplicação web para gestão nutricional que conecta nutricionistas e pacientes,
 #### 🔀 Programação em Par
 A programação em par foi realizada durante calls no Discord, onde uma integrante atuava como driver e outra como navigator.
 
-
+<img src="assets/pair.png" width="800">
 
 *De baixo para cima: Malu Coelho(teamomuit...) e Rebeca Ferraz (Nyx)*
  
