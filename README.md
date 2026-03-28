@@ -46,10 +46,15 @@ Aplicação web para gestão nutricional que conecta nutricionistas e pacientes,
 - H2: Cadastro de Nutricionista
 - H3: Criar Plano Alimentar
  
-#### 🌐 Deploy em Produção (Azure)
-*(Link de acesso a ser adicionado)*
- 
-*(Instruções de acesso a serem adicionadas)*
+#### 🌐 Deploy em Produção
+- **Azure:** [alimentamais.azurewebsites.net](http://alimentamais.azurewebsites.net)
+- **Railway:** [alimentamais-production.up.railway.app](https://alimentamais-production.up.railway.app)
+
+**Instruções de acesso:**
+1. Acesse um dos links acima
+2. Clique em "Criar conta" para se cadastrar como paciente ou nutricionista
+3. Após o cadastro, faça login com seu e-mail e senha
+4. Nutricionistas podem criar planos alimentares para os pacientes cadastrados
  
 #### 🎥 Screencast do Sistema
 *(Link do YouTube a ser adicionado)*
