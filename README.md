@@ -58,7 +58,7 @@ Aplicação web para gestão nutricional que conecta nutricionistas e pacientes,
 *(Link ou relato a ser adicionado)*
  
 #### 🐛 Issue/Bug Tracker (GitHub)
-<img src="assets/issuebugtracker1.png" width="800">
+<img src="assets/issuebugtracker.png" width="800">
  
 #### 📌 Quadro da Sprint 02 (JIRA)
 <img src="assets/sprint2.jpeg" width="800">
