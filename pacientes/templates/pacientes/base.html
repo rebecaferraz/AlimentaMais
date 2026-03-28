@@ -1,0 +1,379 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Alimenta+{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+    :root {
+      --g9:    #1B4D2E;
+      --g7:    #2a6b42;
+      --g2:    #b8dfc8;
+      --g1:    #e8f5ee;
+      --gold:  #C5A059;
+      --goldd: #9a7b3e;
+      --ink:   #1A1A1A;
+      --muted: #6b7280;
+      --off:   #F5F5F5;
+      --white: #ffffff;
+      --r:     12px;
+    }
+ 
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--off);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+ 
+    /* ─── LAYOUT ────────────────────────────────── */
+    .page {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
+    }
+ 
+    /* ─── COLUNA ESQUERDA ───────────────────────── */
+    .left {
+      background: var(--g9);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 3rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+ 
+    .left::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -60px;
+      width: 280px; height: 280px;
+      border-radius: 50%;
+      border: 1px solid rgba(197,160,89,.12);
+    }
+ 
+    .left::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -40px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      border: 1px solid rgba(197,160,89,.08);
+    }
+ 
+    .logo-img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      margin-bottom: 1.5rem;
+    }
+ 
+    .brand-name {
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: .2em;
+      margin-bottom: .4rem;
+    }
+ 
+    .brand-name span { color: var(--gold); }
+ 
+    .gold-line {
+      width: 36px;
+      height: 2px;
+      background: var(--gold);
+      margin: 1.25rem auto;
+    }
+ 
+    .brand-tagline {
+      font-size: .75rem;
+      font-weight: 300;
+      color: rgba(255,255,255,.5);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 2;
+      max-width: 220px;
+    }
+ 
+    .features { margin-top: 2.5rem; width: 100%; }
+ 
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      margin-bottom: .85rem;
+      color: rgba(255,255,255,.75);
+      font-size: .78rem;
+    }
+ 
+    .feature-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+ 
+    /* ─── COLUNA DIREITA ────────────────────────── */
+    .right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem 2rem;
+      overflow-y: auto;
+    }
+ 
+    .card {
+      background: var(--white);
+      border-radius: var(--r);
+      border: 1px solid rgba(27,77,46,.1);
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 390px;
+    }
+ 
+    .card-badge {
+      display: inline-block;
+      background: var(--g1);
+      color: var(--g9);
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: .28rem .7rem;
+      border-radius: 99px;
+      margin-bottom: 1rem;
+      border: 1px solid var(--g2);
+    }
+ 
+    .card h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: .3rem;
+      letter-spacing: .02em;
+    }
+ 
+    .card-sub {
+      font-size: .78rem;
+      color: var(--muted);
+      margin-bottom: 1.6rem;
+      line-height: 1.6;
+    }
+ 
+    /* ─── FORMULÁRIO ────────────────────────────── */
+    .form-group { margin-bottom: .9rem; }
+ 
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .75rem;
+    }
+ 
+    label {
+      display: block;
+      font-size: .67rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: .38rem;
+    }
+ 
+    label span {
+      color: var(--muted);
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+ 
+    input, select, textarea {
+      width: 100%;
+      padding: .62rem .85rem;
+      border: 1.5px solid rgba(0,0,0,.1);
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: .8rem;
+      color: var(--ink);
+      background: #FAFAFA;
+      outline: none;
+      transition: border-color .15s, background .15s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+ 
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--g7);
+      background: var(--white);
+    }
+ 
+    input::placeholder, textarea::placeholder {
+      color: #bbb;
+      font-size: .78rem;
+    }
+ 
+    textarea { min-height: 56px; resize: none; }
+ 
+    .divider {
+      height: 1px;
+      background: rgba(0,0,0,.06);
+      margin: 1.1rem 0;
+      position: relative;
+    }
+ 
+    .divider span {
+      position: absolute;
+      top: -8px; left: 0;
+      font-size: .62rem;
+      font-weight: 700;
+      color: var(--muted);
+      background: var(--white);
+      padding-right: .6rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+ 
+    /* ─── BOTÃO ─────────────────────────────────── */
+    .btn {
+      display: block;
+      width: 100%;
+      padding: .82rem;
+      background: var(--gold);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: .5rem;
+      transition: background .15s;
+      text-align: center;
+      text-decoration: none;
+    }
+ 
+    .btn:hover { background: var(--goldd); }
+ 
+    /* ─── LINKS ─────────────────────────────────── */
+    .link-row {
+      text-align: center;
+      font-size: .72rem;
+      color: var(--muted);
+      margin-top: 1.1rem;
+    }
+ 
+    .link-row a {
+      color: var(--goldd);
+      font-weight: 700;
+      text-decoration: none;
+    }
+ 
+    .link-row a:hover { text-decoration: underline; }
+ 
+    .forgot-link { text-align: right; margin-bottom: .5rem; }
+ 
+    .forgot-link a {
+      font-size: .7rem;
+      color: var(--goldd);
+      font-weight: 600;
+      text-decoration: none;
+    }
+ 
+    /* ─── MENSAGENS DJANGO ──────────────────────── */
+    .messages { margin-bottom: 1rem; }
+ 
+    .msg {
+      padding: .65rem .9rem;
+      border-radius: 8px;
+      font-size: .78rem;
+      font-weight: 500;
+      margin-bottom: .5rem;
+    }
+ 
+    .msg-error  { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
+    .msg-success { background: var(--g1); color: var(--g9); border: 1px solid var(--g2); }
+ 
+    /* ─── SELETOR PACIENTE / NUTRICIONISTA ──────── */
+    .tipo-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .6rem;
+      margin-bottom: 1.4rem;
+    }
+ 
+    .tipo-btn {
+      padding: .7rem .5rem;
+      border: 1.5px solid rgba(0,0,0,.1);
+      border-radius: 8px;
+      background: #FAFAFA;
+      cursor: pointer;
+      text-align: center;
+      transition: all .15s;
+    }
+ 
+    .tipo-btn .tipo-icon { font-size: 1.2rem; margin-bottom: .3rem; }
+ 
+    .tipo-btn .tipo-label {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+ 
+    .tipo-btn.active { border-color: var(--g7); background: var(--g1); }
+    .tipo-btn.active .tipo-label { color: var(--g9); }
+  </style>
+ 
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+ 
+<div class="page">
+ 
+  <!-- ── ESQUERDA ── -->
+  <div class="left">
+    <img class="logo-img" src="{% static 'img/logo.png' %}" alt="Logo Alimenta+">
+    <div class="brand-name">ALIMENTA<span>+</span></div>
+    <div class="gold-line"></div>
+    <div class="brand-tagline">Nutrição inteligente que conecta profissionais e pacientes</div>
+    <div class="features">
+      <div class="feature"><div class="feature-dot"></div>Planos alimentares personalizados</div>
+      <div class="feature"><div class="feature-dot"></div>Acompanhamento de metas nutricionais</div>
+      <div class="feature"><div class="feature-dot"></div>Monitoramento de adesão em tempo real</div>
+    </div>
+  </div>
+ 
+  <!-- ── DIREITA ── -->
+  <div class="right">
+    <div class="card">
+ 
+      {% if messages %}
+      <div class="messages">
+        {% for message in messages %}
+          <div class="msg {% if message.tags == 'error' %}msg-error{% else %}msg-success{% endif %}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+ 
+      {% block content %}{% endblock %}
+ 
+    </div>
+  </div>
+ 
+</div>
+ 
+{% block extra_js %}{% endblock %}
+</body>
+</html>

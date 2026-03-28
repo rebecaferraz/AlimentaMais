@@ -1,7 +1,109 @@
-<h2>Cadastro de Paciente</h2>
-
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Criar conta</button>
+{% extends 'pacientes/base.html' %}
+{% block title %}Criar conta · Alimenta+{% endblock %}
+ 
+{% block content %}
+ 
+<div class="card-badge">Novo por aqui?</div>
+<h2>Criar conta</h2>
+<p class="card-sub">Selecione seu perfil para começar.</p>
+ 
+<!-- seletor paciente / nutricionista -->
+<div class="tipo-selector">
+  <div class="tipo-btn active" id="btn-paciente" onclick="selectTipo('paciente')">
+    <div class="tipo-icon">🧑</div>
+    <div class="tipo-label">Paciente</div>
+  </div>
+  <div class="tipo-btn" id="btn-nutri" onclick="selectTipo('nutri')">
+    <div class="tipo-icon">👩‍⚕️</div>
+    <div class="tipo-label">Nutricionista</div>
+  </div>
+</div>
+ 
+<form method="POST" action="{% url 'cadastro' %}">
+  {% csrf_token %}
+  <input type="hidden" name="tipo" id="campo-tipo" value="paciente">
+ 
+  <!-- campos comuns -->
+  <div class="form-group">
+    <label for="nome">Nome completo</label>
+    <input type="text" id="nome" name="nome" placeholder="Maria Silva" required>
+  </div>
+ 
+  <!-- CRN — só visível para nutricionista -->
+  <div class="form-group" id="campo-crn" style="display:none">
+    <label for="crn">CRN</label>
+    <input type="text" id="crn" name="crn" placeholder="12345-PE">
+  </div>
+ 
+  <div class="form-group">
+    <label for="email">E-mail</label>
+    <input type="email" id="email" name="email" placeholder="maria@email.com" required>
+  </div>
+ 
+  <div class="form-group">
+    <label for="senha">Senha <span>(mínimo 8 caracteres)</span></label>
+    <input type="password" id="senha" name="senha" placeholder="••••••••" required>
+  </div>
+ 
+  <!-- campos de saúde — só visíveis para paciente -->
+  <div id="campos-saude">
+    <div class="divider"><span>Saúde</span></div>
+ 
+    <div class="form-row">
+      <div class="form-group">
+        <label for="peso">Peso (kg)</label>
+        <input type="number" id="peso" name="peso" placeholder="70" step="0.1">
+      </div>
+      <div class="form-group">
+        <label for="altura">Altura (m)</label>
+        <input type="number" id="altura" name="altura" placeholder="1.70" step="0.01">
+      </div>
+    </div>
+ 
+    <div class="form-row">
+      <div class="form-group">
+        <label for="idade">Idade</label>
+        <input type="number" id="idade" name="idade" placeholder="28">
+      </div>
+      <div class="form-group">
+        <label for="objetivo">Objetivo</label>
+        <select id="objetivo" name="objetivo">
+          <option value="emagrecimento">Emagrecimento</option>
+          <option value="ganho_massa">Ganho de massa</option>
+          <option value="manutencao">Manutenção</option>
+          <option value="saude">Saúde geral</option>
+        </select>
+      </div>
+    </div>
+ 
+    <div class="form-group">
+      <label for="restricoes">Restrições alimentares <span>(opcional)</span></label>
+      <textarea id="restricoes" name="restricoes" placeholder="Ex: intolerância à lactose..."></textarea>
+    </div>
+  </div>
+ 
+  <button type="submit" class="btn">Criar conta</button>
 </form>
+ 
+<p class="link-row">Já tem conta? <a href="{% url 'login' %}">Entrar</a></p>
+ 
+{% endblock %}
+ 
+{% block extra_js %}
+<script>
+  function selectTipo(tipo) {
+    document.getElementById('campo-tipo').value = tipo;
+ 
+    document.getElementById('btn-paciente').classList.toggle('active', tipo === 'paciente');
+    document.getElementById('btn-nutri').classList.toggle('active', tipo === 'nutri');
+ 
+    document.getElementById('campos-saude').style.display = tipo === 'paciente' ? 'block' : 'none';
+    document.getElementById('campo-crn').style.display    = tipo === 'nutri'     ? 'block' : 'none';
+ 
+    document.getElementById('crn').required    = (tipo === 'nutri');
+    document.getElementById('peso').required   = (tipo === 'paciente');
+    document.getElementById('altura').required = (tipo === 'paciente');
+    document.getElementById('idade').required  = (tipo === 'paciente');
+  }
+</script>
+{% endblock %}

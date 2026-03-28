@@ -1,0 +1,33 @@
+{% extends 'pacientes/base.html' %}
+{% block title %}Entrar · Alimenta+{% endblock %}
+ 
+{% block content %}
+ 
+<div class="card-badge">Bem-vindo(a)</div>
+<h2>Entrar</h2>
+<p class="card-sub">Acesse sua conta para continuar.</p>
+ 
+<form method="POST" action="{% url 'login' %}">
+  {% csrf_token %}
+ 
+  <div class="form-group">
+    <label for="email">E-mail</label>
+    <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+  </div>
+ 
+  <div class="form-group">
+    <label for="senha">Senha</label>
+    <input type="password" id="senha" name="senha" placeholder="••••••••" required>
+  </div>
+ 
+  <div class="forgot-link">
+    <a href="#">Esqueci minha senha</a>
+  </div>
+ 
+  <button type="submit" class="btn">Entrar</button>
+</form>
+ 
+<p class="link-row">Não tem conta? <a href="{% url 'cadastro' %}">Criar conta</a></p>
+ 
+{% endblock %}
+ 
