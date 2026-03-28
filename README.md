@@ -55,12 +55,6 @@ Aplicação web para gestão nutricional que conecta nutricionistas e pacientes,
 3. Após o cadastro, faça login com seu e-mail e senha
 4. Nutricionistas podem criar planos alimentares para os pacientes cadastrados
 
-**Instruções de acesso:**
-1. Acesse um dos links acima
-2. Clique em "Criar conta" para se cadastrar como paciente ou nutricionista
-3. Após o cadastro, faça login com seu e-mail e senha
-4. Nutricionistas podem criar planos alimentares para os pacientes cadastrados
- 
 #### 🎥 Screencast do Sistema
 *(Link do YouTube a ser adicionado)*
  
