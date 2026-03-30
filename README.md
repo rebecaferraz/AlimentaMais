@@ -65,6 +65,7 @@ A programação em par foi realizada durante calls no Discord, onde uma integran
 <img src="assets/pair2.png" width="800">
 
 *Print 1: Malu Coelho(teamomuit...) e Rebeca Ferraz (Nyx)*
+
 *Print 2: Luísa Magalhães (Luísa) e Laura Vitória (La...)*
  
 #### 🐛 Issue/Bug Tracker (GitHub)
