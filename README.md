@@ -56,7 +56,7 @@ Aplicação web para gestão nutricional que conecta nutricionistas e pacientes,
 4. Nutricionistas podem criar planos alimentares para os pacientes cadastrados
 
 #### 🎥 Screencast do Sistema
-[Clique aqui para acessar o screencast das histórias 1,2 e 3 implementadas](https://youtu.be/0gu0yG1TrSc)
+[Clique aqui para acessar o screencast das Histórias 1, 2 e 3 Implementadas](https://youtu.be/0gu0yG1TrSc)
  
 #### 🔀 Programação em Par
 A programação em par foi realizada durante calls no Discord, onde uma integrante atuava como driver (Malu e Luísa) e outra como navigator (Rebeca e Laura).
