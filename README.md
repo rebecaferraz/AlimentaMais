@@ -59,11 +59,13 @@ Aplicação web para gestão nutricional que conecta nutricionistas e pacientes,
 *(Link do YouTube a ser adicionado)*
  
 #### 🔀 Programação em Par
-A programação em par foi realizada durante calls no Discord, onde uma integrante atuava como driver (Malu) e outra como navigator (Rebeca).
+A programação em par foi realizada durante calls no Discord, onde uma integrante atuava como driver (Malu e Luísa) e outra como navigator (Rebeca e Laura).
 
 <img src="assets/pair.png" width="800">
+<img src="assets/pair2.png" width="800">
 
-*De baixo para cima: Malu Coelho(teamomuit...) e Rebeca Ferraz (Nyx)*
+*Print 1: Malu Coelho(teamomuit...) e Rebeca Ferraz (Nyx)*
+*Print 2: Luísa Magalhães (Luísa) e Laura Vitória (La...)*
  
 #### 🐛 Issue/Bug Tracker (GitHub)
 <img src="assets/issuebugtracker2.png" width="800">
