@@ -69,10 +69,10 @@ A programação em par foi realizada durante calls no Discord, onde uma integran
 <img src="assets/issuebugtracker2.png" width="800">
  
 #### 📌 Quadro da Sprint 02 (JIRA)
-<img src="assets/sprint2.jpeg" width="800">
+<img src="assets/sprint2att.jpeg" width="800">
  
 #### 📋 Backlog Atualizado (JIRA)
-<img src="assets/backlog3.jpeg" width="800">
+<img src="assets/backlogatt.jpeg" width="800">
 
 ## 🛠️ Tecnologias
  
