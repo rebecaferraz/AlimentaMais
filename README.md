@@ -61,14 +61,20 @@ Aplicação web para gestão nutricional que conecta nutricionistas e pacientes,
 [Clique aqui para acessar o screencast das Histórias 1, 2 e 3 Implementadas](https://youtu.be/0gu0yG1TrSc)
 
 #### 🔀 Programação em Par
-A programação em par foi realizada durante calls no Discord, onde uma integrante atuava como driver (Malu e Luísa) e outra como navigator (Rebeca e Laura).
+
+A programação em par foi realizada durante calls no Discord ao longo da sprint.
+
+**Dupla 1 — Malu Coelho (driver) e Rebeca Ferraz (navigator)**
+Durante a call, Malu implementou a view de cadastro de paciente (H1) enquanto Rebeca acompanhava o código em tempo real, identificando um erro na validação do e-mail duplicado e sugerindo a correção. Juntas também revisaram o models.py para garantir que os campos de saúde estavam corretos.
+
+**Dupla 2 — Luísa Magalhães (driver) e Laura Vitória (navigator)**
+Luísa trabalhou na view de cadastro de nutricionista (H2) com Laura orientando a estrutura da validação do CRN. Laura identificou que o erro de CRN duplicado não estava sendo tratado corretamente e sugeriu o ajuste na lógica da view. As duas também revisaram juntas o template de cadastro para garantir que o seletor de tipo (paciente/nutricionista) estava funcionando corretamente.
 
 <img src="assets/pair.png" width="800">
 <img src="assets/pair2.png" width="800">
 
-*Print 1: Malu Coelho(teamomuit...) e Rebeca Ferraz (Nyx)*
+*Print 1: Malu Coelho (teamomuit...) e Rebeca Ferraz (Nyx)*
 *Print 2: Luísa Magalhães (Luísa) e Laura Vitória (La...)*
-
 #### 🐛 Issue/Bug Tracker (GitHub)
 <img src="assets/issuebugtracker2.png" width="800">
 
