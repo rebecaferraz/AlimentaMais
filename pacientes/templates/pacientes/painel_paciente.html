@@ -288,35 +288,37 @@
   {% endif %}
 
   <!-- PLANOS ALIMENTARES -->
-  <div class="section-title">Meus Planos Alimentares</div>
+  <div class="section-title">Meu Plano Alimentar</div>
 
-  {% if paciente.planos.all %}
-    {% for plano in paciente.planos.all %}
+  {% if plano_ativo %}
     <div class="plano-card">
       <div class="plano-header">
-        <div class="plano-titulo">{{ plano.titulo }}</div>
+        <div class="plano-titulo">{{ plano_ativo.titulo }}</div>
         <span class="plano-badge">Ativo</span>
       </div>
       <div class="plano-meta">
-        Nutricionista: {{ plano.nutricionista.nome }} &nbsp;·&nbsp;
-        Criado em: {{ plano.criado_em|date:"d/m/Y" }}
+        Nutricionista: {{ plano_ativo.nutricionista.nome }} &nbsp;·&nbsp;
+        Criado em: {{ plano_ativo.criado_em|date:"d/m/Y" }}
       </div>
-      <div class="refeicoes-grid">
-        {% for refeicao in plano.refeicoes.all %}
-        <div class="refeicao-item">
-          <div class="refeicao-nome">{{ refeicao.nome }}</div>
-          <div class="refeicao-dia">{{ refeicao.get_dia_semana_display }}</div>
-          <div class="refeicao-horario">{{ refeicao.horario|time:"H:i" }}</div>
-          <div class="refeicao-desc">{{ refeicao.descricao }}</div>
+      {% for dia, refeicoes in refeicoes_por_dia.items %}
+      <div style="margin-bottom: 1.5rem;">
+        <h3 style="font-size: 1rem; font-weight: 600; color: var(--g9); margin-bottom: 0.5rem;">{{ dia }}</h3>
+        <div class="refeicoes-grid">
+          {% for refeicao in refeicoes %}
+          <div class="refeicao-item">
+            <div class="refeicao-nome">{{ refeicao.nome }}</div>
+            <div class="refeicao-horario">{{ refeicao.horario|time:"H:i" }}</div>
+            <div class="refeicao-desc">{{ refeicao.descricao }}</div>
+          </div>
+          {% endfor %}
         </div>
-        {% endfor %}
       </div>
+      {% endfor %}
     </div>
-    {% endfor %}
   {% else %}
     <div class="empty-state">
       <div class="empty-icon">🥗</div>
-      <div>Nenhum plano alimentar criado ainda.</div>
+      <div>Nenhum plano alimentar ativo.</div>
       <div style="margin-top:.4rem; font-size:.72rem;">Aguarde seu nutricionista cadastrar um plano para você.</div>
     </div>
   {% endif %}

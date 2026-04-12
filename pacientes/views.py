@@ -85,7 +85,19 @@ def painel_paciente(request):
     if not paciente_id:
         return redirect('login')
     paciente = Paciente.objects.get(id=paciente_id)
-    return render(request, 'pacientes/painel_paciente.html', {'paciente': paciente})
+    plano_ativo = paciente.planos.filter(ativo=True).first()
+    refeicoes_por_dia = {}
+    if plano_ativo:
+        for refeicao in plano_ativo.refeicoes.all():
+            dia = refeicao.get_dia_semana_display()
+            if dia not in refeicoes_por_dia:
+                refeicoes_por_dia[dia] = []
+            refeicoes_por_dia[dia].append(refeicao)
+    return render(request, 'pacientes/painel_paciente.html', {
+        'paciente': paciente,
+        'plano_ativo': plano_ativo,
+        'refeicoes_por_dia': refeicoes_por_dia,
+    })
  
  
 def painel_nutricionista(request):
@@ -127,10 +139,13 @@ def criar_plano(request):
             return render(request, 'pacientes/criar_plano.html', {'pacientes': pacientes})
  
         paciente = Paciente.objects.get(id=paciente_id)
+        # Desativar planos anteriores do paciente
+        PlanoAlimentar.objects.filter(paciente=paciente).update(ativo=False)
         plano    = PlanoAlimentar.objects.create(
             titulo=titulo,
             paciente=paciente,
             nutricionista=nutricionista,
+            ativo=True,
         )
  
         for nome, horario, descricao, dia in zip(nomes, horarios, descricoes, dias):
