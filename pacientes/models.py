@@ -34,11 +34,12 @@ class PlanoAlimentar(models.Model):
     nutricionista = models.ForeignKey(Nutricionista, on_delete=models.CASCADE, related_name='planos')
     ativo         = models.BooleanField(default=True)
     criado_em     = models.DateTimeField(auto_now_add=True)
- 
+    atualizado_em = models.DateTimeField(auto_now=True)
+
     def __str__(self):
         return f'{self.titulo} — {self.paciente.nome}'
- 
- 
+
+
 # H3: Refeição
 class Refeicao(models.Model):
     DIAS = [
@@ -49,8 +50,6 @@ class Refeicao(models.Model):
     nome       = models.CharField(max_length=255)
     horario    = models.TimeField()
     descricao  = models.TextField()
-    dia_semana = models.CharField(max_length=3, choices=DIAS)
- 
     def __str__(self):
         return f'{self.nome} ({self.dia_semana})'
  

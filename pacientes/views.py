@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.utils import timezone
 from .models import Paciente, Nutricionista, PlanoAlimentar, Refeicao
  
  
@@ -88,6 +89,8 @@ def painel_paciente(request):
     plano_ativo = paciente.planos.filter(ativo=True).first()
     refeicoes_por_dia = {}
     if plano_ativo:
+        if (timezone.now() - plano_ativo.atualizado_em).days > 30:
+            messages.warning(request, 'Seu plano não é atualizado há 30 dias. Entre em contato com seu nutricionista')
         for refeicao in plano_ativo.refeicoes.all():
             dia = refeicao.get_dia_semana_display()
             if dia not in refeicoes_por_dia:
