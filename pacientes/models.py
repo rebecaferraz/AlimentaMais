@@ -52,4 +52,24 @@ class Refeicao(models.Model):
     descricao  = models.TextField()
     def __str__(self):
         return f'{self.nome} ({self.dia_semana})'
+
+
+# H4: Meta Nutricional
+class MetaNutricional(models.Model):
+    paciente = models.OneToOneField(Paciente, on_delete=models.CASCADE, related_name='meta_nutricional')
+    calorias_diarias = models.FloatField()
+    proteina = models.FloatField()
+    carboidratos = models.FloatField()
+    criado_em = models.DateTimeField(auto_now_add=True)
+    atualizado_em = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'Metas de {self.paciente.nome}'
+
+    def clean(self):
+        from django.core.exceptions import ValidationError
+        if self.calorias_diarias <= 0:
+            raise ValidationError('O valor de calorias deve ser um número positivo')
+        if self.proteina is None or self.carboidratos is None:
+            raise ValidationError('Todos os campos de meta são obrigatórios')
  

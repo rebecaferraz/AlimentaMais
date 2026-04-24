@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.utils import timezone
-from .models import Paciente, Nutricionista, PlanoAlimentar, Refeicao
+from .models import Paciente, Nutricionista, PlanoAlimentar, Refeicao, MetaNutricional
+from .forms import MetaNutricionalForm
  
  
 # TELA DE LOGIN
@@ -96,10 +97,12 @@ def painel_paciente(request):
             if dia not in refeicoes_por_dia:
                 refeicoes_por_dia[dia] = []
             refeicoes_por_dia[dia].append(refeicao)
+    meta = getattr(paciente, 'meta_nutricional', None)
     return render(request, 'pacientes/painel_paciente.html', {
         'paciente': paciente,
         'plano_ativo': plano_ativo,
         'refeicoes_por_dia': refeicoes_por_dia,
+        'meta': meta,
     })
  
  
@@ -222,3 +225,37 @@ def esqueci_senha(request):
     request.session.pop('reset_tipo', None)
 
     return render(request, 'pacientes/esqueci_senha.html', {'passo': 1})
+
+
+# PERFIL DO PACIENTE
+def perfil_paciente(request, paciente_id):
+    nutri_id = request.session.get('nutricionista_id')
+    if not nutri_id:
+        return redirect('login')
+
+    try:
+        paciente = Paciente.objects.get(id=paciente_id)
+    except Paciente.DoesNotExist:
+        messages.error(request, 'Paciente não encontrado.')
+        return redirect('painel_nutricionista')
+
+    meta_form = MetaNutricionalForm()
+    if request.method == 'POST':
+        meta_form = MetaNutricionalForm(request.POST)
+        if meta_form.is_valid():
+            meta, created = MetaNutricional.objects.get_or_create(paciente=paciente, defaults=meta_form.cleaned_data)
+            if not created:
+                for field in meta_form.cleaned_data:
+                    setattr(meta, field, meta_form.cleaned_data[field])
+                meta.save()
+            messages.success(request, 'Metas nutricionais salvas com sucesso!')
+            return redirect('perfil_paciente', paciente_id=paciente_id)
+        else:
+            messages.error(request, 'Erro ao salvar metas. Verifique os dados.')
+
+    meta = getattr(paciente, 'meta_nutricional', None)
+    return render(request, 'pacientes/perfil_paciente.html', {
+        'paciente': paciente,
+        'meta_form': meta_form,
+        'meta': meta,
+    })

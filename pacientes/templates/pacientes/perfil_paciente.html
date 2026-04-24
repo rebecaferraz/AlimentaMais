@@ -1,0 +1,241 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil de {{ paciente.nome }} · Alimenta+</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --g9:    #1B4D2E;
+      --g7:    #2a6b42;
+      --g2:    #b8dfc8;
+      --g1:    #e8f5ee;
+      --gold:  #C5A059;
+      --goldd: #9a7b3e;
+      --ink:   #1A1A1A;
+      --muted: #6b7280;
+      --off:   #F5F5F5;
+      --white: #ffffff;
+      --r:     12px;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--off);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    .navbar {
+      background: var(--g9);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .navbar-brand {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: .15em;
+    }
+
+    .navbar-brand span { color: var(--gold); }
+
+    .navbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .btn {
+      background: var(--gold);
+      color: var(--white);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: var(--r);
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s;
+    }
+
+    .btn:hover { background: var(--goldd); }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid var(--white);
+    }
+
+    .btn-secondary:hover { background: var(--white); color: var(--g9); }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--g9);
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: var(--r);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: var(--r);
+      font-size: 1rem;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    .alert {
+      padding: 1rem;
+      border-radius: var(--r);
+      margin-bottom: 1rem;
+    }
+
+    .alert-success {
+      background: var(--g1);
+      color: var(--g9);
+      border: 1px solid var(--g2);
+    }
+
+    .alert-error {
+      background: #fee;
+      color: #c33;
+      border: 1px solid #fcc;
+    }
+
+    .meta-display {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .meta-item {
+      background: var(--g1);
+      padding: 1rem;
+      border-radius: var(--r);
+      text-align: center;
+      flex: 1;
+    }
+
+    .meta-value {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--g9);
+    }
+
+    .meta-label {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="navbar-brand">Alimenta<span>+</span></div>
+    <div class="navbar-actions">
+      <a href="{% url 'painel_nutricionista' %}" class="btn btn-secondary">Voltar ao Painel</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="section-title">Perfil de {{ paciente.nome }}</div>
+
+    <div class="card">
+      <h3>Informações do Paciente</h3>
+      <p><strong>E-mail:</strong> {{ paciente.email }}</p>
+      <p><strong>Idade:</strong> {{ paciente.idade }} anos</p>
+      <p><strong>Peso:</strong> {{ paciente.peso }} kg</p>
+      <p><strong>Altura:</strong> {{ paciente.altura }} m</p>
+      <p><strong>Objetivo:</strong> {{ paciente.objetivo }}</p>
+      {% if paciente.restricoes %}
+      <p><strong>Restrições:</strong> {{ paciente.restricoes }}</p>
+      {% endif %}
+    </div>
+
+    <div class="card">
+      <h3>Metas Nutricionais</h3>
+      {% if meta %}
+      <div class="meta-display">
+        <div class="meta-item">
+          <div class="meta-value">{{ meta.calorias_diarias }}</div>
+          <div class="meta-label">Calorias Diárias</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-value">{{ meta.proteina }}g</div>
+          <div class="meta-label">Proteína</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-value">{{ meta.carboidratos }}g</div>
+          <div class="meta-label">Carboidratos</div>
+        </div>
+      </div>
+      {% else %}
+      <p>Nenhuma meta definida ainda.</p>
+      {% endif %}
+
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="{{ meta_form.calorias_diarias.id_for_label }}">Calorias Diárias</label>
+          {{ meta_form.calorias_diarias }}
+          {% if meta_form.calorias_diarias.errors %}
+            <div class="alert alert-error">{{ meta_form.calorias_diarias.errors.0 }}</div>
+          {% endif %}
+        </div>
+        <div class="form-group">
+          <label for="{{ meta_form.proteina.id_for_label }}">Proteína (g)</label>
+          {{ meta_form.proteina }}
+          {% if meta_form.proteina.errors %}
+            <div class="alert alert-error">{{ meta_form.proteina.errors.0 }}</div>
+          {% endif %}
+        </div>
+        <div class="form-group">
+          <label for="{{ meta_form.carboidratos.id_for_label }}">Carboidratos (g)</label>
+          {{ meta_form.carboidratos }}
+          {% if meta_form.carboidratos.errors %}
+            <div class="alert alert-error">{{ meta_form.carboidratos.errors.0 }}</div>
+          {% endif %}
+        </div>
+        <button type="submit" class="btn">Salvar Metas</button>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

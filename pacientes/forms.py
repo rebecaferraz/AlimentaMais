@@ -1,5 +1,5 @@
 from django import forms
-from .models import Paciente
+from .models import Paciente, MetaNutricional
 
 class PacienteForm(forms.ModelForm):
     senha = forms.CharField(widget=forms.PasswordInput)
@@ -23,3 +23,15 @@ class PacienteForm(forms.ModelForm):
 
         if senha != confirmar:
             raise forms.ValidationError("As senhas não coincidem")
+
+
+class MetaNutricionalForm(forms.ModelForm):
+    class Meta:
+        model = MetaNutricional
+        fields = ['calorias_diarias', 'proteina', 'carboidratos']
+
+    def clean_calorias_diarias(self):
+        calorias = self.cleaned_data.get('calorias_diarias')
+        if calorias is not None and calorias <= 0:
+            raise forms.ValidationError('O valor de calorias deve ser um número positivo')
+        return calorias

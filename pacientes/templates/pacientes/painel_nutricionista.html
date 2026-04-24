@@ -251,6 +251,7 @@
           <th>Altura</th>
           <th>Objetivo</th>
           <th>Planos</th>
+          <th>Ações</th>
         </tr>
       </thead>
       <tbody>
@@ -263,6 +264,7 @@
           <td>{{ p.altura }} m</td>
           <td>{{ p.objetivo }}</td>
           <td><span class="badge">{{ p.planos.count }} plano{{ p.planos.count|pluralize }}</span></td>
+          <td><a href="{% url 'perfil_paciente' p.id %}" class="btn btn-small">Ver Perfil</a></td>
         </tr>
         {% endfor %}
       </tbody>

@@ -242,6 +242,37 @@
       margin-bottom: .75rem;
     }
 
+    /* METAS NUTRICIONAIS */
+    .meta-display {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .meta-item {
+      background: var(--white);
+      border-radius: var(--r);
+      border: 1px solid rgba(27,77,46,.1);
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .meta-value {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--g9);
+    }
+
+    .meta-label {
+      font-size: .7rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      margin-top: .3rem;
+    }
+
     /* MENSAGENS */
     .messages { margin-bottom: 1.2rem; }
 
@@ -309,6 +340,31 @@
   <div class="info-card" style="margin-bottom:2rem;">
     <div class="label">Restrições alimentares</div>
     <div style="font-size:.82rem; color:var(--ink); margin-top:.4rem;">{{ paciente.restricoes }}</div>
+  </div>
+  {% endif %}
+
+  <!-- MINHAS METAS -->
+  <div class="section-title">Minhas Metas</div>
+  {% if meta %}
+  <div class="meta-display">
+    <div class="meta-item">
+      <div class="meta-value">{{ meta.calorias_diarias }}</div>
+      <div class="meta-label">Calorias Diárias</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-value">{{ meta.proteina }}<span class="unit">g</span></div>
+      <div class="meta-label">Proteína</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-value">{{ meta.carboidratos }}<span class="unit">g</span></div>
+      <div class="meta-label">Carboidratos</div>
+    </div>
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <div class="empty-icon">📊</div>
+    <div>Nenhuma meta nutricional definida ainda.</div>
+    <div style="margin-top:.4rem; font-size:.72rem;">Aguarde seu nutricionista definir suas metas.</div>
   </div>
   {% endif %}
 
