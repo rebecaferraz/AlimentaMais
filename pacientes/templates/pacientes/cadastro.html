@@ -52,6 +52,15 @@
 
   <!-- campos de saúde — só visíveis para paciente -->
   <div id="campos-saude">
+    <div class="form-group">
+      <label for="nutricionista_id">Nutricionista</label>
+      <select id="nutricionista_id" name="nutricionista_id">
+        <option value="">Selecione sua nutricionista (opcional)</option>
+        {% for n in nutricionistas %}
+        <option value="{{ n.id }}">{{ n.nome }} — CRN {{ n.crn }}</option>
+        {% endfor %}
+      </select>
+    </div>
     <div class="divider"><span>Saúde</span></div>
  
     <div class="form-row">

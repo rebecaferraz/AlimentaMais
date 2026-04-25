@@ -3,14 +3,18 @@ from django.db import models
  
 # H1: Paciente
 class Paciente(models.Model):
-    nome       = models.CharField(max_length=255)
-    email      = models.EmailField(unique=True)
-    senha      = models.CharField(max_length=255)
-    peso       = models.FloatField()
-    altura     = models.FloatField()
-    idade      = models.IntegerField()
-    objetivo   = models.CharField(max_length=100)
-    restricoes = models.TextField(blank=True, default='')
+    nome          = models.CharField(max_length=255)
+    email         = models.EmailField(unique=True)
+    senha         = models.CharField(max_length=255)
+    peso          = models.FloatField()
+    altura        = models.FloatField()
+    idade         = models.IntegerField()
+    objetivo      = models.CharField(max_length=100)
+    restricoes    = models.TextField(blank=True, default='')
+    nutricionista = models.ForeignKey(
+        'Nutricionista', null=True, blank=True,
+        on_delete=models.SET_NULL, related_name='pacientes'
+    )
  
     def __str__(self):
         return self.nome
