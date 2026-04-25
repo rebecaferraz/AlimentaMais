@@ -36,11 +36,17 @@ def cadastro(request):
         email = request.POST.get('email', '').strip()
         senha = request.POST.get('senha', '')
  
+        confirmar_senha = request.POST.get('confirmar_senha', '')
+
         if len(senha) < 8:
             messages.error(request, 'A senha precisa ter pelo menos 8 caracteres.')
             return render(request, 'pacientes/cadastro.html')
- 
-        #  H1: Cadastro de Paciente 
+
+        if senha != confirmar_senha:
+            messages.error(request, 'As senhas não coincidem.')
+            return render(request, 'pacientes/cadastro.html')
+
+        #  H1: Cadastro de Paciente
         if tipo == 'paciente':
             if Paciente.objects.filter(email=email).exists():
                 messages.error(request, 'Este e-mail já está cadastrado. Faça login ou use outro e-mail.')

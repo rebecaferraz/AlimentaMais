@@ -35,3 +35,10 @@ class MetaNutricionalForm(forms.ModelForm):
         if calorias is not None and calorias <= 0:
             raise forms.ValidationError('O valor de calorias deve ser um número positivo')
         return calorias
+
+    def clean(self):
+        cleaned_data = super().clean()
+        campos = ['calorias_diarias', 'proteina', 'carboidratos']
+        if any(cleaned_data.get(c) is None for c in campos):
+            raise forms.ValidationError('Todos os campos de meta são obrigatórios')
+        return cleaned_data

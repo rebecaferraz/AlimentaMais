@@ -50,8 +50,10 @@ class Refeicao(models.Model):
     nome       = models.CharField(max_length=255)
     horario    = models.TimeField()
     descricao  = models.TextField()
+    dia_semana = models.CharField(max_length=3, choices=DIAS, default='seg')
+
     def __str__(self):
-        return f'{self.nome} ({self.dia_semana})'
+        return f'{self.nome} ({self.get_dia_semana_display()})'
 
 
 # H4: Meta Nutricional
