@@ -131,10 +131,22 @@ def marcar_consumida(request):
         if not paciente_id:
             return redirect('login')
         paciente = Paciente.objects.get(id=paciente_id)
+        
+        # Check if patient has an active plan
+        plano_ativo = paciente.planos.filter(ativo=True).first()
+        if not plano_ativo:
+            messages.error(request, 'Você não tem um plano alimentar ativo. Aguarde seu nutricionista criar seu plano')
+            return redirect('painel_paciente')
+        
         refeicao_id = request.POST.get('refeicao_id')
         if refeicao_id:
             try:
                 refeicao = Refeicao.objects.get(id=refeicao_id)
+                # Check if the refeicao belongs to the patient's active plan
+                if refeicao.plano != plano_ativo:
+                    messages.error(request, 'Refeição não pertence ao seu plano ativo.')
+                    return redirect('painel_paciente')
+                
                 hoje = timezone.now().date()
                 # Check if already consumed today
                 if not ConsumoRefeicao.objects.filter(
