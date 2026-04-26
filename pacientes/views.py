@@ -145,7 +145,7 @@ def marcar_consumida(request):
                     ConsumoRefeicao.objects.create(refeicao=refeicao, paciente=paciente)
                     messages.success(request, f'Refeição "{refeicao.nome}" marcada como consumida!')
                 else:
-                    messages.warning(request, f'Refeição "{refeicao.nome}" já foi marcada como consumida hoje.')
+                    messages.warning(request, 'Você já registrou esta refeição hoje')
             except Refeicao.DoesNotExist:
                 messages.error(request, 'Refeição não encontrada.')
         return redirect('painel_paciente')
