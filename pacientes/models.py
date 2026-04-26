@@ -78,4 +78,14 @@ class MetaNutricional(models.Model):
             raise ValidationError('O valor de calorias deve ser um número positivo')
         if self.proteina is None or self.carboidratos is None:
             raise ValidationError('Todos os campos de meta são obrigatórios')
+
+
+# H5: Consumo de Refeição
+class ConsumoRefeicao(models.Model):
+    refeicao = models.ForeignKey(Refeicao, on_delete=models.CASCADE, related_name='consumos')
+    paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, related_name='consumos')
+    data_hora = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.paciente.nome} consumiu {self.refeicao.nome} em {self.data_hora}'
  

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.utils import timezone
-from .models import Paciente, Nutricionista, PlanoAlimentar, Refeicao, MetaNutricional
+from .models import Paciente, Nutricionista, PlanoAlimentar, Refeicao, MetaNutricional, ConsumoRefeicao
 from .forms import MetaNutricionalForm
 
 
@@ -99,6 +99,7 @@ def painel_paciente(request):
     paciente = Paciente.objects.get(id=paciente_id)
     plano_ativo = paciente.planos.filter(ativo=True).first()
     refeicoes_por_dia = {}
+    hoje = timezone.now().date()
     if plano_ativo:
         if (timezone.now() - plano_ativo.atualizado_em).days > 30:
             messages.warning(request, 'Seu plano não é atualizado há 30 dias. Entre em contato com seu nutricionista')
@@ -106,7 +107,15 @@ def painel_paciente(request):
             dia = refeicao.get_dia_semana_display()
             if dia not in refeicoes_por_dia:
                 refeicoes_por_dia[dia] = []
-            refeicoes_por_dia[dia].append(refeicao)
+            consumida_hoje = ConsumoRefeicao.objects.filter(
+                refeicao=refeicao,
+                paciente=paciente,
+                data_hora__date=hoje
+            ).exists()
+            refeicoes_por_dia[dia].append({
+                'refeicao': refeicao,
+                'consumida_hoje': consumida_hoje
+            })
     meta = getattr(paciente, 'meta_nutricional', None)
     return render(request, 'pacientes/painel_paciente.html', {
         'paciente': paciente,
@@ -114,6 +123,33 @@ def painel_paciente(request):
         'refeicoes_por_dia': refeicoes_por_dia,
         'meta': meta,
     })
+
+
+def marcar_consumida(request):
+    if request.method == 'POST':
+        paciente_id = request.session.get('paciente_id')
+        if not paciente_id:
+            return redirect('login')
+        paciente = Paciente.objects.get(id=paciente_id)
+        refeicao_id = request.POST.get('refeicao_id')
+        if refeicao_id:
+            try:
+                refeicao = Refeicao.objects.get(id=refeicao_id)
+                hoje = timezone.now().date()
+                # Check if already consumed today
+                if not ConsumoRefeicao.objects.filter(
+                    refeicao=refeicao,
+                    paciente=paciente,
+                    data_hora__date=hoje
+                ).exists():
+                    ConsumoRefeicao.objects.create(refeicao=refeicao, paciente=paciente)
+                    messages.success(request, f'Refeição "{refeicao.nome}" marcada como consumida!')
+                else:
+                    messages.warning(request, f'Refeição "{refeicao.nome}" já foi marcada como consumida hoje.')
+            except Refeicao.DoesNotExist:
+                messages.error(request, 'Refeição não encontrada.')
+        return redirect('painel_paciente')
+    return redirect('painel_paciente')
 
 
 def painel_nutricionista(request):
