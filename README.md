@@ -110,7 +110,7 @@ Rebeca ficou responsável pela correção de bugs e implementação dos testes d
 Luísa implementou as histórias H4, H5 e H6 enquanto Laura acompanhava e orientava as decisões de implementação. Laura identificou pontos de atenção na lógica de visualização do plano alimentar e no registro de refeição consumida, sugerindo ajustes para garantir que os cenários das histórias fossem atendidos corretamente.
 
 #### 🐛 Issue/Bug Tracker
-*(Print)*
+<img src="assets/issu:bugTracker.png" width="800">
 
 #### 📌 Quadro da Sprint 03 (JIRA)
 *(Print)*
