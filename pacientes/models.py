@@ -74,9 +74,9 @@ class MetaNutricional(models.Model):
 
     def clean(self):
         from django.core.exceptions import ValidationError
-        if self.calorias_diarias <= 0:
+        if self.calorias_diarias is not None and self.calorias_diarias <= 0:
             raise ValidationError('O valor de calorias deve ser um número positivo')
-        if self.proteina is None or self.carboidratos is None:
+        if self.calorias_diarias is None or self.proteina is None or self.carboidratos is None:
             raise ValidationError('Todos os campos de meta são obrigatórios')
 
 

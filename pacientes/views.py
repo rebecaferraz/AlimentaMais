@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.utils import timezone
+from django.utils.timezone import localdate
 from .models import Paciente, Nutricionista, PlanoAlimentar, Refeicao, MetaNutricional, ConsumoRefeicao
 from .forms import MetaNutricionalForm
 
@@ -99,7 +100,7 @@ def painel_paciente(request):
     paciente = Paciente.objects.get(id=paciente_id)
     plano_ativo = paciente.planos.filter(ativo=True).first()
     refeicoes_por_dia = {}
-    hoje = timezone.now().date()
+    hoje = localdate()
     if plano_ativo:
         if (timezone.now() - plano_ativo.atualizado_em).days > 30:
             messages.warning(request, 'Seu plano não é atualizado há 30 dias. Entre em contato com seu nutricionista')
@@ -147,7 +148,7 @@ def marcar_consumida(request):
                     messages.error(request, 'Refeição não pertence ao seu plano ativo.')
                     return redirect('painel_paciente')
                 
-                hoje = timezone.now().date()
+                hoje = localdate()
                 # Check if already consumed today
                 if not ConsumoRefeicao.objects.filter(
                     refeicao=refeicao,
