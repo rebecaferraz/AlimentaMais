@@ -99,9 +99,6 @@ Luísa trabalhou na view de cadastro de nutricionista (H2) com Laura orientando 
 #### 🎥 Screencast das Novas Histórias
 *(Link do YouTube a ser adicionado)*
 
-#### ⚙️ CI/CD
-*(Link do pipeline no GitHub)*
-
 #### 🎥 Screencast dos Testes E2E
 *(Link do YouTube a ser adicionado)*
 
