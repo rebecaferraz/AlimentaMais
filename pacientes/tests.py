@@ -345,7 +345,8 @@ class H4VisualizarPlanoTest(BaseSeleniumTest):
         plano = self.criar_plano(self.paciente, self.nutri)
         self.criar_refeicao(plano, nome='Almoço', dia='seg')
 
-        self.login('joao@email.com', 'senha123')
+        self.injetar_sessao(paciente_id=self.paciente.id, tipo='paciente')  
+        self.get('/painel/') 
 
         corpo = self.corpo()
         self.assertIn('Meu Plano Alimentar', corpo)
@@ -354,7 +355,8 @@ class H4VisualizarPlanoTest(BaseSeleniumTest):
 
     def test_cenario2_sem_plano_cadastrado(self):
         """Cenário 2 (Negativo): sem plano exibe mensagem de espera"""
-        self.login('joao@email.com', 'senha123')
+        self.injetar_sessao(paciente_id=self.paciente.id, tipo='paciente')  # ← troca
+        self.get('/painel/') 
         self.aguardar_texto('Nenhum plano alimentar disponível')
 
     def test_cenario3_aviso_plano_desatualizado(self):
@@ -362,7 +364,8 @@ class H4VisualizarPlanoTest(BaseSeleniumTest):
         plano = self.criar_plano(self.paciente, self.nutri, defasagem_dias=31)
         self.criar_refeicao(plano)
 
-        self.login('joao@email.com', 'senha123')
+        self.injetar_sessao(paciente_id=self.paciente.id, tipo='paciente')  # ← troca
+        self.get('/painel/') 
         self.aguardar_texto('30 dias')
 
 
@@ -382,7 +385,8 @@ class H5RegistrarRefeicaoTest(BaseSeleniumTest):
         plano = self.criar_plano(self.paciente, self.nutri)
         self.criar_refeicao(plano, nome='Café da manhã')
 
-        self.login('joao@email.com', 'senha123')
+        self.injetar_sessao(paciente_id=self.paciente.id, tipo='paciente')  # ← troca
+        self.get('/painel/') 
         self.driver.find_element(By.CSS_SELECTOR, '.btn-marcar').click()
 
         self.aguardar_texto('marcada como consumida')
@@ -392,7 +396,8 @@ class H5RegistrarRefeicaoTest(BaseSeleniumTest):
         plano = self.criar_plano(self.paciente, self.nutri)
         refeicao = self.criar_refeicao(plano, nome='Café da manhã')
 
-        self.login('joao@email.com', 'senha123')
+        self.injetar_sessao(paciente_id=self.paciente.id, tipo='paciente')  # ← troca
+        self.get('/painel/')
         self.driver.find_element(By.CSS_SELECTOR, '.btn-marcar').click()
         self.aguardar_texto('marcada como consumida')  # aguarda redirect completar
 
