@@ -1,3 +1,4 @@
-pip install -r requirements.txt
-python manage.py migrate
-gunicorn --bind=0.0.0.0 --timeout 600 config.wsgi
+#!/bin/bash
+source antenv/bin/activate
+python manage.py migrate --noinput
+gunicorn --bind=0.0.0.0:8000 --timeout 600 config.wsgi
