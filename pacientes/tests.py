@@ -42,6 +42,7 @@ class BaseSeleniumTest(StaticLiveServerTestCase):
 
     def setUp(self):
         self.driver.delete_all_cookies()
+        self.driver.get('about:blank')
 
     def get(self, path):
         self.driver.get(f'{self.live_server_url}{path}')
