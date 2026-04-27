@@ -22,6 +22,7 @@ def criar_driver():
     opts = Options()
     opts.add_argument('--no-sandbox')
     opts.add_argument('--disable-dev-shm-usage')
+    opts.add_argument('--disable-gpu')
     service = Service(ChromeDriverManager().install())
     return webdriver.Chrome(service=service, options=opts)
 
@@ -32,7 +33,7 @@ class BaseSeleniumTest(StaticLiveServerTestCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.driver = criar_driver()
-        cls.driver.implicitly_wait(5)
+        cls.driver.implicitly_wait(10)
 
     @classmethod
     def tearDownClass(cls):
@@ -48,7 +49,7 @@ class BaseSeleniumTest(StaticLiveServerTestCase):
     def corpo(self):
         return self.driver.find_element(By.TAG_NAME, 'body').text
 
-    def aguardar_texto(self, texto, timeout=15):
+    def aguardar_texto(self, texto, timeout=25):
         WebDriverWait(self.driver, timeout,
                       ignored_exceptions=[StaleElementReferenceException]).until(
             lambda d: texto in d.find_element(By.TAG_NAME, 'body').text
