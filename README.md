@@ -86,7 +86,7 @@ Luísa trabalhou na view de cadastro de nutricionista (H2) com Laura orientando 
 
 </details>
 <details>
-<summary>Entrega 03 | Novas Histórias, CI/CD e Testes</summary>
+<summary>Entrega 03 | Novas Histórias e Testes</summary>
   
 #### 🖥️ Histórias Implementadas
 - H4: Visualizar Plano Alimentar
