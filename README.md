@@ -113,7 +113,7 @@ Luísa implementou as histórias H4, H5 e H6 enquanto Laura acompanhava e orient
 <img src="assets/issu:bugTracker.png" width="800">
 
 #### 📌 Quadro da Sprint 03 (JIRA)
-*(Print)*
+<img src="assets/jira333.png" width="800">
 
 </details>
 
