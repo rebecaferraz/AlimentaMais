@@ -113,6 +113,7 @@ python manage.py test pacientes --verbosity=2
 #### Programação em Par
 
 Novamente, a programação em par foi realizada durante calls no Discord ao longo da sprint.
+
 **Dupla 1 — Rebeca Ferraz (driver) e Malu Coelho (navigator)**
 Rebeca ficou responsável pela correção de bugs e implementação dos testes de sistema. Durante a call, Malu acompanhava o código em tempo real, identificando problemas e sugerindo abordagens. Juntas encontraram o bug do campo dia_semana que havia sido removido do banco mas ainda era referenciado no código, quebrando as histórias H3 e H4. Também corrigiram o formulário de cadastro que estava sem o campo de confirmar senha e ajustaram a validação de metas nutricionais que causava erro 500 com valores inválidos. Na parte de testes, usaram Selenium para automatizar o browser e verificar os cenários definidos nas histórias de usuário, cobrindo H1 a H6.
 
