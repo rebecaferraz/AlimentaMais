@@ -11,9 +11,10 @@ Aplicação web para gestão nutricional que conecta nutricionistas e pacientes,
   <tr>
     <td align="center"><a href="https://github.com/PedroOliveiira"><b>Pedro Oliveira</b></a></td>
     <td align="center"><a href="https://github.com/rebecaferraz"><b>Rebeca Ferraz</b></a></td>
-    <td align="center"><a href="https://github.com/vfmns-arch"><b>Vinícius Souza</b></a></td>
+    <td></td>
   </tr>
 </table>
+
 
 ## 📋 Entregas
 
@@ -130,3 +131,4 @@ Luísa implementou as histórias H4, H5 e H6 enquanto Laura acompanhava e orient
 - **Front-end:** HTML, CSS, JavaScript
 - **Deploy:** Azure
 - **Versionamento:** Git + GitHub
+- **Testes:** Selenium + ChromeDriver
