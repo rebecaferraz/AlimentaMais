@@ -1,7 +1,7 @@
 # Alimenta+ 
 Aplicação web para gestão nutricional que conecta nutricionistas e pacientes, focada em auxiliar a adesão ao plano alimentar e monitoramento de metas.
 
-# 👥 Equipe
+# Equipe
 <table>
   <tr>
     <td align="center"><a href="https://github.com/Lauravi354"><b>Laura Alves</b></a></td>
@@ -16,27 +16,27 @@ Aplicação web para gestão nutricional que conecta nutricionistas e pacientes,
 </table>
 
 
-## 📋 Entregas
+## Entregas
 
 <details>
 <summary>Entrega 01 | Histórias de Usuário e Protótipo Lo-Fi</summary>
 
-#### 📄 Histórias de Usuário
+#### Histórias de Usuário
 [Clique aqui para acessar o documento de histórias de usuário](https://docs.google.com/document/d/1L_HgO1RpaM8HjgqgyjmdYe_5D2p69a1GbW1iN-cltrA/edit?usp=sharing)
 
-#### 🎨 Protótipo Lo-Fi (Figma)
+#### Protótipo Lo-Fi (Figma)
 [Clique aqui para acessar o protótipo Lo-Fi no Figma](https://www.figma.com/community/file/1612289552402822938/lo-fi-login-cadastro-de-paciente)
 
-#### 🎥 Screencast do Protótipo Lo-Fi
+#### Screencast do Protótipo Lo-Fi
 [Clique aqui para acessar o screencast do Protótipo Lo-Fi](https://www.youtube.com/watch?v=oniXMrVcW00)
 
-#### 📌 Quadro da Sprint (JIRA)
+#### Quadro da Sprint (JIRA)
 <img src="assets/quadrosprint2.png" width="800">
 
-#### 📋 Backlog do Produto (JIRA)
+#### Backlog do Produto (JIRA)
 <img src="assets/backlog2.png" width="800">
 
-#### 🗂️ JIRA
+#### JIRA
 [Clique aqui para acessar o JIRA](https://cesar-team-ko4t55oe.atlassian.net/jira/software/projects/SCRUM/boards/1)
 
 </details>
@@ -44,12 +44,12 @@ Aplicação web para gestão nutricional que conecta nutricionistas e pacientes,
 <details>
 <summary>Entrega 02 | Implementação e Deploy</summary>
 
-#### 🖥️ Histórias Implementadas
+#### Histórias Implementadas
 - H1: Cadastro de Paciente
 - H2: Cadastro de Nutricionista
 - H3: Criar Plano Alimentar
 
-#### 🌐 Deploy em Produção (Azure)
+#### Deploy em Produção (Azure)
 [alimentamais.azurewebsites.net](http://alimentamais.azurewebsites.net)
 
 **Instruções de acesso:**
@@ -58,10 +58,10 @@ Aplicação web para gestão nutricional que conecta nutricionistas e pacientes,
 3. Após o cadastro, faça login com seu e-mail e senha
 4. Nutricionistas podem criar planos alimentares para os pacientes cadastrados
 
-#### 🎥 Screencast do Sistema
+#### Screencast do Sistema
 [Clique aqui para acessar o screencast das Histórias 1, 2 e 3 Implementadas](https://youtu.be/0gu0yG1TrSc)
 
-#### 🔀 Programação em Par
+#### Programação em Par
 
 A programação em par foi realizada durante calls no Discord ao longo da sprint.
 
@@ -76,28 +76,28 @@ Luísa trabalhou na view de cadastro de nutricionista (H2) com Laura orientando 
 
 *Print 1: Malu Coelho (teamomuit...) e Rebeca Ferraz (Nyx)*
 *Print 2: Luísa Magalhães (Luísa) e Laura Vitória (La...)*
-#### 🐛 Issue/Bug Tracker (GitHub)
+#### Issue/Bug Tracker (GitHub)
 <img src="assets/issuebugtracker2.png" width="800">
 
-#### 📌 Quadro da Sprint 02 (JIRA)
+#### Quadro da Sprint 02 (JIRA)
 <img src="assets/quadrosprintatt.png" width="800">
 
-#### 📋 Backlog Atualizado (JIRA)
+#### Backlog Atualizado (JIRA)
 <img src="assets/quadrobacklogatt.png" width="800">
 
 </details>
 <details>
 <summary>Entrega 03 | Novas Histórias e Testes</summary>
   
-#### 🖥️ Histórias Implementadas
+#### Histórias Implementadas
 - H4: Visualizar Plano Alimentar
 - H5: Registrar Refeição Consumida
 - H6: Definir Metas Nutricionais
 
-#### 🌐 Deploy em Produção
+#### Deploy em Produção
 [alimentamais.azurewebsites.net](http://alimentamais.azurewebsites.net)
 
-#### 🎥 Screencast das Novas Histórias
+#### Screencast das Novas Histórias
 *[Clique aqui para acessar o screencast das Histórias 4, 5 e 6 Implementadas](https://youtu.be/3ZTSrPcAnM8)*
 
 #### Testes E2E (Selenium)
@@ -108,24 +108,24 @@ Os testes automatizados cobrem as histórias H1 a H6, simulando um usuário real
 pip install selenium webdriver-manager
 python manage.py test pacientes --verbosity=2
 ```
-🎥 *[Clique aqui para acessar o screencast dos Testes](https://youtu.be/NAeOgBxTFRw?si=cArc31EQW5BXpG3S)*
+*[Clique aqui para acessar o screencast dos Testes](https://youtu.be/NAeOgBxTFRw?si=cArc31EQW5BXpG3S)*
 
-#### 🔀 Programação em Par
+#### Programação em Par
 **Dupla 1 — Rebeca Ferraz (driver) e Malu Coelho (navigator)**
 Rebeca ficou responsável pela correção de bugs e implementação dos testes de sistema. Durante a call, Malu acompanhava o código em tempo real, identificando problemas e sugerindo abordagens. Juntas encontraram o bug do campo dia_semana que havia sido removido do banco mas ainda era referenciado no código, quebrando as histórias H3 e H4. Também corrigiram o formulário de cadastro que estava sem o campo de confirmar senha e ajustaram a validação de metas nutricionais que causava erro 500 com valores inválidos. Na parte de testes, usaram Selenium para automatizar o browser e verificar os cenários definidos nas histórias de usuário, cobrindo H1 a H6.
 
 **Dupla 2 — Luísa (driver) e Laura Vitória (navigator)**
 Luísa implementou as histórias H4, H5 e H6 enquanto Laura acompanhava e orientava as decisões de implementação. Laura identificou pontos de atenção na lógica de visualização do plano alimentar e no registro de refeição consumida, sugerindo ajustes para garantir que os cenários das histórias fossem atendidos corretamente.
 
-#### 🐛 Issue/Bug Tracker
+#### Issue/Bug Tracker
 <img src="assets/issuebugtracker2.png" width="800">
 
-#### 📌 Quadro da Sprint 03 (JIRA)
+#### Quadro da Sprint 03 (JIRA)
 <img src="assets/jira333.png" width="800">
 
 </details>
 
-## 🛠️ Tecnologias
+## Tecnologias
 - **Back-end:** Python + Django
 - **Banco de dados:** SQLite (desenvolvimento) / PostgreSQL (produção)
 - **Front-end:** HTML, CSS, JavaScript
