@@ -108,7 +108,7 @@ Os testes automatizados cobrem as histórias H1 a H6, simulando um usuário real
 pip install selenium webdriver-manager
 python manage.py test pacientes --verbosity=2
 ```
-*[Clique aqui para acessar o screencast dos Testes](https://youtu.be/NAeOgBxTFRw?si=cArc31EQW5BXpG3S)*
+🎥 *[Clique aqui para acessar o screencast dos Testes](https://youtu.be/NAeOgBxTFRw?si=cArc31EQW5BXpG3S)*
 
 #### 🔀 Programação em Par
 **Dupla 1 — Rebeca Ferraz (driver) e Malu Coelho (navigator)**
