@@ -98,7 +98,7 @@ Luísa trabalhou na view de cadastro de nutricionista (H2) com Laura orientando 
 [alimentamais.azurewebsites.net](http://alimentamais.azurewebsites.net)
 
 #### 🎥 Screencast das Novas Histórias
-*(Link do YouTube a ser adicionado)*
+*[Clique aqui para acessar o screencast das Histórias 4, 5 e 6 Implementadas](https://youtu.be/3ZTSrPcAnM8)*
 
 #### Testes E2E (Selenium)
 Os testes automatizados cobrem as histórias H1 a H6, simulando um usuário real no navegador com Selenium + ChromeDriver. São 19 testes no total, incluindo cenários positivos e negativos.
