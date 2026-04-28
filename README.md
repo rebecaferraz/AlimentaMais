@@ -99,8 +99,15 @@ Luísa trabalhou na view de cadastro de nutricionista (H2) com Laura orientando 
 #### 🎥 Screencast das Novas Histórias
 *(Link do YouTube a ser adicionado)*
 
-#### 🎥 Screencast dos Testes E2E
-*(Link do YouTube a ser adicionado)*
+#### Testes E2E (Selenium)
+Os testes automatizados cobrem as histórias H1 a H6, simulando um usuário real no navegador com Selenium + ChromeDriver. São 19 testes no total, incluindo cenários positivos e negativos.
+
+**Como executar:**
+```bash
+pip install selenium webdriver-manager
+python manage.py test pacientes --verbosity=2
+```
+*[Clique aqui para acessar o screencast dos Testes](https://youtu.be/NAeOgBxTFRw?si=cArc31EQW5BXpG3S)*
 
 #### 🔀 Programação em Par
 **Dupla 1 — Rebeca Ferraz (driver) e Malu Coelho (navigator)**
