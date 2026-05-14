@@ -11,10 +11,13 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import StaleElementReferenceException
 from webdriver_manager.chrome import ChromeDriverManager
 from django.utils import timezone
+from django.test import TestCase
+from django.urls import reverse
 from datetime import timedelta
 
 from pacientes.models import (
-    Paciente, Nutricionista, PlanoAlimentar, Refeicao, MetaNutricional
+    Paciente, Nutricionista, PlanoAlimentar, Refeicao, MetaNutricional,
+    ConsumoRefeicao,
 )
 
 
@@ -480,3 +483,51 @@ class H6MetasNutricionaisTest(BaseSeleniumTest):
         self.driver.find_element(By.TAG_NAME, 'form').submit()
         self.aguardar_texto('campos de meta são obrigatórios')
         self.assertFalse(MetaNutricional.objects.filter(paciente=self.paciente).exists())
+
+
+class AdesaoRelatorioTest(TestCase):
+
+    def setUp(self):
+        self.nutri = Nutricionista.objects.create(
+            nome='Dra. Ana', crn='12345-PE', email='ana@nutri.com', senha='senha123'
+        )
+        self.paciente = Paciente.objects.create(
+            nome='Maria Silva', email='maria@cliente.com', senha='senha123',
+            peso=65, altura=1.65, idade=32,
+            objetivo='Saúde', nutricionista=self.nutri
+        )
+        self.plano = PlanoAlimentar.objects.create(
+            titulo='Plano Teste', paciente=self.paciente, nutricionista=self.nutri, ativo=True
+        )
+
+    def test_relatorio_adesao_exibe_percentual_e_historico(self):
+        data_consumo = timezone.localdate() - timedelta(days=3)
+        dias_da_semana = ['seg', 'ter', 'qua', 'qui', 'sex', 'sab', 'dom']
+        dia_semana_esperado = dias_da_semana[data_consumo.weekday()]
+        self.refeicao = Refeicao.objects.create(
+            plano=self.plano,
+            nome='Café da manhã',
+            horario='08:00',
+            descricao='Frutas e aveia',
+            dia_semana=dia_semana_esperado
+        )
+        ConsumoRefeicao.objects.create(
+            refeicao=self.refeicao,
+            paciente=self.paciente,
+            data_hora=timezone.now() - timedelta(days=3)
+        )
+
+        session = self.client.session
+        session['nutricionista_id'] = self.nutri.id
+        session.save()
+
+        url = reverse('perfil_paciente', args=[self.paciente.id])
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('relatorio_adesao', response.context)
+        relatorio = response.context['relatorio_adesao']
+        self.assertEqual(relatorio['total_realizado'], 1)
+        self.assertGreaterEqual(relatorio['taxa_percentual'], 0)
+        self.assertEqual(len(relatorio['dias']), 7)
+        self.assertContains(response, 'Relatório de Adesão')

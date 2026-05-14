@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.utils import timezone
 from django.utils.timezone import localdate
+from datetime import timedelta
 from .models import Paciente, Nutricionista, PlanoAlimentar, Refeicao, MetaNutricional, ConsumoRefeicao
 from .forms import MetaNutricionalForm
 
@@ -228,6 +229,70 @@ def criar_plano(request):
     return render(request, 'pacientes/criar_plano.html', {'pacientes': pacientes})
 
 
+def calcular_relatorio_adesao(paciente, plano, dias=7):
+    if not plano:
+        return {
+            'plano': None,
+            'taxa_percentual': 0,
+            'total_esperado': 0,
+            'total_realizado': 0,
+            'dias': [],
+        }
+
+    hoje = localdate()
+    inicio = hoje - timedelta(days=dias - 1)
+    dias_da_semana = ['seg', 'ter', 'qua', 'qui', 'sex', 'sab', 'dom']
+    refeicoes_por_dia = {dia: 0 for dia in dias_da_semana}
+    for refeicao in plano.refeicoes.all():
+        refeicoes_por_dia[refeicao.dia_semana] += 1
+
+    consumos = ConsumoRefeicao.objects.filter(
+        paciente=paciente,
+        refeicao__plano=plano,
+        data_hora__date__gte=inicio,
+        data_hora__date__lte=hoje,
+    ).values('refeicao_id', 'data_hora__date')
+
+    consumos_por_dia = {}
+    for registro in consumos:
+        data = registro['data_hora__date']
+        consumos_por_dia.setdefault(data, set()).add(registro['refeicao_id'])
+
+    historico = []
+    total_esperado = 0
+    total_realizado = 0
+
+    for delta in range(dias):
+        data = inicio + timedelta(days=delta)
+        codigo_dia = dias_da_semana[data.weekday()]
+        esperado = refeicoes_por_dia.get(codigo_dia, 0)
+        realizado = len(consumos_por_dia.get(data, set()))
+        percentual = round((realizado / esperado) * 100) if esperado else 0
+
+        historico.append({
+            'data': data,
+            'label': data.strftime('%a, %d/%m'),
+            'esperado': esperado,
+            'realizado': realizado,
+            'percentual': percentual,
+        })
+
+        total_esperado += esperado
+        total_realizado += realizado
+
+    taxa_percentual = round((total_realizado / total_esperado) * 100) if total_esperado else 0
+
+    return {
+        'plano': plano,
+        'taxa_percentual': taxa_percentual,
+        'total_esperado': total_esperado,
+        'total_realizado': total_realizado,
+        'dias': historico,
+        'inicio': inicio,
+        'fim': hoje,
+    }
+
+
 # ESQUECI MINHA SENHA
 def esqueci_senha(request):
     email_validado = request.session.get('reset_email')
@@ -292,6 +357,7 @@ def perfil_paciente(request, paciente_id):
         messages.error(request, 'Paciente não encontrado.')
         return redirect('painel_nutricionista')
 
+    plano_ativo = paciente.planos.filter(ativo=True).first()
     meta_form = MetaNutricionalForm()
     if request.method == 'POST':
         meta_form = MetaNutricionalForm(request.POST)
@@ -307,8 +373,10 @@ def perfil_paciente(request, paciente_id):
             messages.error(request, 'Erro ao salvar metas. Verifique os dados.')
 
     meta = getattr(paciente, 'meta_nutricional', None)
+    relatorio_adesao = calcular_relatorio_adesao(paciente, plano_ativo)
     return render(request, 'pacientes/perfil_paciente.html', {
         'paciente': paciente,
         'meta_form': meta_form,
         'meta': meta,
+        'relatorio_adesao': relatorio_adesao,
     })

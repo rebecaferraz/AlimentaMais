@@ -152,6 +152,103 @@
       flex: 1;
     }
 
+    .tab-nav {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .tab-button {
+      border: 1px solid rgba(26,26,26,.12);
+      background: var(--white);
+      color: var(--g9);
+      padding: 0.8rem 1rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .tab-button.active {
+      background: var(--gold);
+      color: var(--white);
+      border-color: transparent;
+    }
+
+    .tab-panel.hidden {
+      display: none;
+    }
+
+    .report-summary {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--g9);
+    }
+
+    .report-grid {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .report-item {
+      background: var(--off);
+      padding: 1rem;
+      border-radius: var(--r);
+      display: grid;
+      gap: 0.35rem;
+    }
+
+    .report-item strong {
+      color: var(--g9);
+      font-size: 0.98rem;
+    }
+
+    .report-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    .report-table th,
+    .report-table td {
+      padding: 0.85rem 0.7rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(0,0,0,.08);
+      font-size: 0.9rem;
+    }
+
+    .report-table th {
+      color: var(--muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 3rem;
+      border-radius: 999px;
+      padding: 0.3rem 0.6rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .badge-status.ok {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    .badge-status.warn {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
     .meta-value {
       font-size: 1.5rem;
       font-weight: 600;
@@ -186,69 +283,141 @@
 
     <div class="section-title">Perfil de {{ paciente.nome }}</div>
 
-    <div class="card">
-      <h3>Informações do Paciente</h3>
-      <p><strong>E-mail:</strong> {{ paciente.email }}</p>
-      <p><strong>Idade:</strong> {{ paciente.idade }} anos</p>
-      <p><strong>Peso:</strong> {{ paciente.peso }} kg</p>
-      <p><strong>Altura:</strong> {{ paciente.altura }} m</p>
-      <p><strong>Objetivo:</strong> {{ paciente.objetivo }}</p>
-      {% if paciente.restricoes %}
-      <p><strong>Restrições:</strong> {{ paciente.restricoes }}</p>
-      {% endif %}
+    <div class="tab-nav">
+      <button type="button" class="tab-button active" data-target="informacoes">Informações</button>
+      <button type="button" class="tab-button" data-target="adesao">Relatório de Adesão</button>
     </div>
 
-    <div class="card">
-      <h3>Metas Nutricionais</h3>
-      {% if meta %}
-      <div class="meta-display">
-        <div class="meta-item">
-          <div class="meta-value">{{ meta.calorias_diarias }}</div>
-          <div class="meta-label">Calorias Diárias</div>
-        </div>
-        <div class="meta-item">
-          <div class="meta-value">{{ meta.proteina }}g</div>
-          <div class="meta-label">Proteína</div>
-        </div>
-        <div class="meta-item">
-          <div class="meta-value">{{ meta.carboidratos }}g</div>
-          <div class="meta-label">Carboidratos</div>
-        </div>
-      </div>
-      {% else %}
-      <p>Nenhuma meta definida ainda.</p>
-      {% endif %}
-
-      <form method="post">
-        {% csrf_token %}
-        {% if meta_form.non_field_errors %}
-          <div class="alert alert-error">{{ meta_form.non_field_errors.0 }}</div>
+    <div id="aba-informacoes" class="tab-panel">
+      <div class="card">
+        <h3>Informações do Paciente</h3>
+        <p><strong>E-mail:</strong> {{ paciente.email }}</p>
+        <p><strong>Idade:</strong> {{ paciente.idade }} anos</p>
+        <p><strong>Peso:</strong> {{ paciente.peso }} kg</p>
+        <p><strong>Altura:</strong> {{ paciente.altura }} m</p>
+        <p><strong>Objetivo:</strong> {{ paciente.objetivo }}</p>
+        {% if paciente.restricoes %}
+        <p><strong>Restrições:</strong> {{ paciente.restricoes }}</p>
         {% endif %}
-        <div class="form-group">
-          <label for="{{ meta_form.calorias_diarias.id_for_label }}">Calorias Diárias</label>
-          {{ meta_form.calorias_diarias }}
-          {% if meta_form.calorias_diarias.errors %}
-            <div class="alert alert-error">{{ meta_form.calorias_diarias.errors.0 }}</div>
-          {% endif %}
+      </div>
+
+      <div class="card">
+        <h3>Metas Nutricionais</h3>
+        {% if meta %}
+        <div class="meta-display">
+          <div class="meta-item">
+            <div class="meta-value">{{ meta.calorias_diarias }}</div>
+            <div class="meta-label">Calorias Diárias</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-value">{{ meta.proteina }}g</div>
+            <div class="meta-label">Proteína</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-value">{{ meta.carboidratos }}g</div>
+            <div class="meta-label">Carboidratos</div>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="{{ meta_form.proteina.id_for_label }}">Proteína (g)</label>
-          {{ meta_form.proteina }}
-          {% if meta_form.proteina.errors %}
-            <div class="alert alert-error">{{ meta_form.proteina.errors.0 }}</div>
+        {% else %}
+        <p>Nenhuma meta definida ainda.</p>
+        {% endif %}
+
+        <form method="post">
+          {% csrf_token %}
+          {% if meta_form.non_field_errors %}
+            <div class="alert alert-error">{{ meta_form.non_field_errors.0 }}</div>
           {% endif %}
-        </div>
-        <div class="form-group">
-          <label for="{{ meta_form.carboidratos.id_for_label }}">Carboidratos (g)</label>
-          {{ meta_form.carboidratos }}
-          {% if meta_form.carboidratos.errors %}
-            <div class="alert alert-error">{{ meta_form.carboidratos.errors.0 }}</div>
-          {% endif %}
-        </div>
-        <button type="submit" class="btn">Salvar Metas</button>
-      </form>
+          <div class="form-group">
+            <label for="{{ meta_form.calorias_diarias.id_for_label }}">Calorias Diárias</label>
+            {{ meta_form.calorias_diarias }}
+            {% if meta_form.calorias_diarias.errors %}
+              <div class="alert alert-error">{{ meta_form.calorias_diarias.errors.0 }}</div>
+            {% endif %}
+          </div>
+          <div class="form-group">
+            <label for="{{ meta_form.proteina.id_for_label }}">Proteína (g)</label>
+            {{ meta_form.proteina }}
+            {% if meta_form.proteina.errors %}
+              <div class="alert alert-error">{{ meta_form.proteina.errors.0 }}</div>
+            {% endif %}
+          </div>
+          <div class="form-group">
+            <label for="{{ meta_form.carboidratos.id_for_label }}">Carboidratos (g)</label>
+            {{ meta_form.carboidratos }}
+            {% if meta_form.carboidratos.errors %}
+              <div class="alert alert-error">{{ meta_form.carboidratos.errors.0 }}</div>
+            {% endif %}
+          </div>
+          <button type="submit" class="btn">Salvar Metas</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="aba-adesao" class="tab-panel hidden">
+      <div class="card">
+        <h3>Relatório de Adesão</h3>
+        {% if relatorio_adesao.plano %}
+          <div class="report-summary">{{ relatorio_adesao.taxa_percentual }}% das refeições realizadas nos últimos 7 dias</div>
+          <p>Período: {{ relatorio_adesao.inicio|date:"d/m" }} — {{ relatorio_adesao.fim|date:"d/m" }}</p>
+
+          <div class="report-grid">
+            <div class="report-item">
+              <strong>Total de refeições esperadas</strong>
+              <span>{{ relatorio_adesao.total_esperado }}</span>
+            </div>
+            <div class="report-item">
+              <strong>Total de refeições realizadas</strong>
+              <span>{{ relatorio_adesao.total_realizado }}</span>
+            </div>
+            <div class="report-item">
+              <strong>Taxa de adesão</strong>
+              <span>{{ relatorio_adesao.taxa_percentual }}%</span>
+            </div>
+          </div>
+
+          <table class="report-table">
+            <thead>
+              <tr>
+                <th>Dia</th>
+                <th>Esperado</th>
+                <th>Realizado</th>
+                <th>Adesão</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for dia in relatorio_adesao.dias %}
+              <tr>
+                <td>{{ dia.label }}</td>
+                <td>{{ dia.esperado }}</td>
+                <td>{{ dia.realizado }}</td>
+                <td>
+                  <span class="badge-status {% if dia.percentual >= 80 %}ok{% else %}warn{% endif %}">
+                    {{ dia.percentual }}%
+                  </span>
+                </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        {% else %}
+          <p>Não há plano alimentar ativo para gerar relatório de adesão.</p>
+        {% endif %}
+      </div>
     </div>
   </div>
 
+
+  <script>
+    const tabs = document.querySelectorAll('.tab-button');
+    const panels = document.querySelectorAll('.tab-panel');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(button => button.classList.remove('active'));
+        panels.forEach(panel => panel.classList.add('hidden'));
+        tab.classList.add('active');
+        document.getElementById('aba-' + tab.dataset.target).classList.remove('hidden');
+      });
+    });
+  </script>
 </body>
 </html>
