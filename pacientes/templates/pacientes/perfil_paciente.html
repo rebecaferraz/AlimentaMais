@@ -357,48 +357,52 @@
       <div class="card">
         <h3>Relatório de Adesão</h3>
         {% if relatorio_adesao.plano %}
-          <div class="report-summary">{{ relatorio_adesao.taxa_percentual }}% das refeições realizadas nos últimos 7 dias</div>
-          <p>Período: {{ relatorio_adesao.inicio|date:"d/m" }} — {{ relatorio_adesao.fim|date:"d/m" }}</p>
+          {% if relatorio_adesao.sem_dados_adesao %}
+            <p>Não há dados de adesão disponíveis para este paciente ainda.</p>
+          {% else %}
+            <div class="report-summary">{{ relatorio_adesao.taxa_percentual }}% das refeições realizadas nos últimos 7 dias</div>
+            <p>Período: {{ relatorio_adesao.inicio|date:"d/m" }} — {{ relatorio_adesao.fim|date:"d/m" }}</p>
 
-          <div class="report-grid">
-            <div class="report-item">
-              <strong>Total de refeições esperadas</strong>
-              <span>{{ relatorio_adesao.total_esperado }}</span>
+            <div class="report-grid">
+              <div class="report-item">
+                <strong>Total de refeições esperadas</strong>
+                <span>{{ relatorio_adesao.total_esperado }}</span>
+              </div>
+              <div class="report-item">
+                <strong>Total de refeições realizadas</strong>
+                <span>{{ relatorio_adesao.total_realizado }}</span>
+              </div>
+              <div class="report-item">
+                <strong>Taxa de adesão</strong>
+                <span>{{ relatorio_adesao.taxa_percentual }}%</span>
+              </div>
             </div>
-            <div class="report-item">
-              <strong>Total de refeições realizadas</strong>
-              <span>{{ relatorio_adesao.total_realizado }}</span>
-            </div>
-            <div class="report-item">
-              <strong>Taxa de adesão</strong>
-              <span>{{ relatorio_adesao.taxa_percentual }}%</span>
-            </div>
-          </div>
 
-          <table class="report-table">
-            <thead>
-              <tr>
-                <th>Dia</th>
-                <th>Esperado</th>
-                <th>Realizado</th>
-                <th>Adesão</th>
-              </tr>
-            </thead>
-            <tbody>
-            {% for dia in relatorio_adesao.dias %}
-              <tr>
-                <td>{{ dia.label }}</td>
-                <td>{{ dia.esperado }}</td>
-                <td>{{ dia.realizado }}</td>
-                <td>
-                  <span class="badge-status {% if dia.percentual >= 80 %}ok{% else %}warn{% endif %}">
-                    {{ dia.percentual }}%
-                  </span>
-                </td>
-              </tr>
-            {% endfor %}
-            </tbody>
-          </table>
+            <table class="report-table">
+              <thead>
+                <tr>
+                  <th>Dia</th>
+                  <th>Esperado</th>
+                  <th>Realizado</th>
+                  <th>Adesão</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for dia in relatorio_adesao.dias %}
+                <tr>
+                  <td>{{ dia.label }}</td>
+                  <td>{{ dia.esperado }}</td>
+                  <td>{{ dia.realizado }}</td>
+                  <td>
+                    <span class="badge-status {% if dia.percentual >= 80 %}ok{% else %}warn{% endif %}">
+                      {{ dia.percentual }}%
+                    </span>
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          {% endif %}
         {% else %}
           <p>Não há plano alimentar ativo para gerar relatório de adesão.</p>
         {% endif %}

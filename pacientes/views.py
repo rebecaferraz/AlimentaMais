@@ -281,6 +281,7 @@ def calcular_relatorio_adesao(paciente, plano, dias=7):
         total_realizado += realizado
 
     taxa_percentual = round((total_realizado / total_esperado) * 100) if total_esperado else 0
+    sem_dados_adesao = total_realizado == 0
 
     return {
         'plano': plano,
@@ -290,6 +291,7 @@ def calcular_relatorio_adesao(paciente, plano, dias=7):
         'dias': historico,
         'inicio': inicio,
         'fim': hoje,
+        'sem_dados_adesao': sem_dados_adesao,
     }
 
 
