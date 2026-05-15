@@ -549,3 +549,62 @@ class AdesaoRelatorioTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Relatório de Adesão')
         self.assertContains(response, 'Este paciente ainda não possui um plano alimentar ativo.')
+
+
+class HistoricoRefeicoesTest(TestCase):
+
+    def setUp(self):
+        self.nutri = Nutricionista.objects.create(
+            nome='Dra. Ana', crn='12345-PE', email='ana@nutri.com', senha='senha123'
+        )
+        self.paciente = Paciente.objects.create(
+            nome='Luciana Costa', email='luciana@cliente.com', senha='senha123',
+            peso=62, altura=1.64, idade=29,
+            objetivo='Energia', nutricionista=self.nutri
+        )
+        self.plano = PlanoAlimentar.objects.create(
+            titulo='Plano Energia', paciente=self.paciente, nutricionista=self.nutri, ativo=True
+        )
+        self.refeicao1 = Refeicao.objects.create(
+            plano=self.plano,
+            nome='Almoço',
+            horario='12:30',
+            descricao='Salada e proteína',
+            dia_semana='seg'
+        )
+        self.refeicao2 = Refeicao.objects.create(
+            plano=self.plano,
+            nome='Jantar',
+            horario='19:30',
+            descricao='Peixe e legumes',
+            dia_semana='seg'
+        )
+
+    def test_historico_exibe_registros_ordenados_por_data(self):
+        registro_antigo = ConsumoRefeicao.objects.create(
+            refeicao=self.refeicao1,
+            paciente=self.paciente,
+            data_hora=timezone.now() - timedelta(days=5, hours=3)
+        )
+        registro_recente = ConsumoRefeicao.objects.create(
+            refeicao=self.refeicao2,
+            paciente=self.paciente,
+            data_hora=timezone.now() - timedelta(days=1, hours=2)
+        )
+
+        session = self.client.session
+        session['paciente_id'] = self.paciente.id
+        session.save()
+
+        response = self.client.get(reverse('painel_paciente'))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Histórico de Refeições')
+        self.assertContains(response, self.refeicao2.nome)
+        self.assertContains(response, self.refeicao1.nome)
+        content = response.content.decode('utf-8')
+        history_section = content.split('Histórico de Refeições', 1)[1]
+        self.assertTrue(history_section.index(self.refeicao2.nome) < history_section.index(self.refeicao1.nome))
+        self.assertContains(response, registro_recente.data_hora.strftime('%d/%m/%Y'))
+        self.assertContains(response, registro_antigo.data_hora.strftime('%d/%m/%Y'))
+        self.assertContains(response, 'Registrado às')

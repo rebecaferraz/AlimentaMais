@@ -270,6 +270,45 @@
       margin-bottom: .75rem;
     }
 
+    .history-list {
+      display: grid;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .history-item {
+      background: var(--white);
+      border-radius: var(--r);
+      border: 1px solid rgba(27,77,46,.12);
+      padding: 1rem 1.2rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: .75rem;
+      align-items: center;
+    }
+
+    .history-details {
+      display: grid;
+      gap: .25rem;
+    }
+
+    .history-date {
+      font-size: .75rem;
+      color: var(--muted);
+    }
+
+    .history-name {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .history-time {
+      font-size: .82rem;
+      color: var(--g9);
+      font-weight: 600;
+    }
+
     /* METAS NUTRICIONAIS */
     .meta-display {
       display: grid;
@@ -440,6 +479,27 @@
       <div class="empty-icon">🥗</div>
       <div>Nenhum plano alimentar disponível.</div>
       <div style="margin-top:.4rem; font-size:.72rem;">Aguarde seu nutricionista criar seu plano.</div>
+    </div>
+  {% endif %}
+
+  <div class="section-title">Histórico de Refeições</div>
+  {% if historico_refeicoes %}
+    <div class="history-list">
+      {% for registro in historico_refeicoes %}
+        <div class="history-item">
+          <div class="history-details">
+            <div class="history-name">{{ registro.refeicao.nome }}</div>
+            <div class="history-date">{{ registro.data_hora|date:"d/m/Y" }}</div>
+          </div>
+          <div class="history-time">Registrado às {{ registro.data_hora|time:"H:i" }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="empty-state">
+      <div class="empty-icon">🕒</div>
+      <div>Nenhum registro de refeição nos últimos 14 dias.</div>
+      <div style="margin-top:.4rem; font-size:.72rem;">Registre suas refeições para acompanhar seu progresso.</div>
     </div>
   {% endif %}
 
