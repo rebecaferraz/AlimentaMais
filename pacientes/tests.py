@@ -609,7 +609,15 @@ class HistoricoRefeicoesTest(TestCase):
         self.assertContains(response, registro_antigo.data_hora.strftime('%d/%m/%Y'))
         self.assertContains(response, 'Registrado às')
 
-    def test_historico_vazio_exibe_mensagem(self):
+    def test_historico_sem_registros_ha_mais_de_30_dias_exibe_aviso(self):
+        registro_antigo = ConsumoRefeicao.objects.create(
+            refeicao=self.refeicao1,
+            paciente=self.paciente,
+        )
+        ConsumoRefeicao.objects.filter(pk=registro_antigo.pk).update(
+            data_hora=timezone.now() - timedelta(days=40)
+        )
+
         session = self.client.session
         session['paciente_id'] = self.paciente.id
         session.save()
@@ -618,4 +626,5 @@ class HistoricoRefeicoesTest(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Histórico de Refeições')
-        self.assertContains(response, 'Nenhuma refeição registrada ainda. Comece registrando sua próxima refeição!')
+        self.assertContains(response, self.refeicao1.nome)
+        self.assertContains(response, 'Você não registra refeições há 30 dias. Que tal registrar agora?')

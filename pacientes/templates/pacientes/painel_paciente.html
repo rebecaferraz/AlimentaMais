@@ -483,6 +483,11 @@
   {% endif %}
 
   <div class="section-title">Histórico de Refeições</div>
+  {% if historico_aviso %}
+    <div class="msg msg-warning" style="margin-bottom: 1rem;">
+      Você não registra refeições há 30 dias. Que tal registrar agora?
+    </div>
+  {% endif %}
   {% if historico_refeicoes %}
     <div class="history-list">
       {% for registro in historico_refeicoes %}

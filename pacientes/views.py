@@ -119,11 +119,15 @@ def painel_paciente(request):
                 'consumida_hoje': consumida_hoje
             })
 
-    hist_14_dias = timezone.now() - timedelta(days=14)
     historico_refeicoes = ConsumoRefeicao.objects.filter(
         paciente=paciente,
-        data_hora__gte=hist_14_dias
     ).select_related('refeicao').order_by('-data_hora')
+
+    historico_aviso = False
+    if historico_refeicoes.exists():
+        ultimo_registro = historico_refeicoes.first()
+        if ultimo_registro.data_hora < timezone.now() - timedelta(days=30):
+            historico_aviso = True
 
     meta = getattr(paciente, 'meta_nutricional', None)
     return render(request, 'pacientes/painel_paciente.html', {
@@ -132,6 +136,7 @@ def painel_paciente(request):
         'refeicoes_por_dia': refeicoes_por_dia,
         'meta': meta,
         'historico_refeicoes': historico_refeicoes,
+        'historico_aviso': historico_aviso,
     })
 
 
