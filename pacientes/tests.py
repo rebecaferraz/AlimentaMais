@@ -532,22 +532,20 @@ class AdesaoRelatorioTest(TestCase):
         self.assertEqual(len(relatorio['dias']), 7)
         self.assertContains(response, 'Relatório de Adesão')
 
-    def test_relatorio_adesao_sem_registros_exibe_mensagem(self):
-        Refeicao.objects.create(
-            plano=self.plano,
-            nome='Café da manhã',
-            horario='08:00',
-            descricao='Frutas e aveia',
-            dia_semana='seg'
+    def test_relatorio_adesao_sem_registro_plano_ativo_exibe_mensagem(self):
+        paciente_sem_plano = Paciente.objects.create(
+            nome='Pedro Lima', email='pedro@cliente.com', senha='senha123',
+            peso=70, altura=1.75, idade=28,
+            objetivo='Saúde', nutricionista=self.nutri
         )
 
         session = self.client.session
         session['nutricionista_id'] = self.nutri.id
         session.save()
 
-        url = reverse('perfil_paciente', args=[self.paciente.id])
+        url = reverse('perfil_paciente', args=[paciente_sem_plano.id])
         response = self.client.get(url)
 
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Relatório de Adesão')
-        self.assertContains(response, 'Não há dados de adesão disponíveis para este paciente ainda')
+        self.assertContains(response, 'Este paciente ainda não possui um plano alimentar ativo.')
