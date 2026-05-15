@@ -608,3 +608,14 @@ class HistoricoRefeicoesTest(TestCase):
         self.assertContains(response, registro_recente.data_hora.strftime('%d/%m/%Y'))
         self.assertContains(response, registro_antigo.data_hora.strftime('%d/%m/%Y'))
         self.assertContains(response, 'Registrado às')
+
+    def test_historico_vazio_exibe_mensagem(self):
+        session = self.client.session
+        session['paciente_id'] = self.paciente.id
+        session.save()
+
+        response = self.client.get(reverse('painel_paciente'))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Histórico de Refeições')
+        self.assertContains(response, 'Nenhuma refeição registrada ainda. Comece registrando sua próxima refeição!')
