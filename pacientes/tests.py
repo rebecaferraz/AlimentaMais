@@ -23,6 +23,7 @@ from pacientes.models import (
 
 def criar_driver():
     opts = Options()
+    opts.add_argument('--headless=new')
     opts.add_argument('--no-sandbox')
     opts.add_argument('--disable-dev-shm-usage')
     opts.add_argument('--disable-gpu')
