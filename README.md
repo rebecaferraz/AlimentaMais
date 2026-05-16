@@ -153,7 +153,14 @@ O pipeline automatiza o build e deploy na Azure a cada push na branch main, incl
 *(Link do YouTube a ser adicionado)*
 
 #### Programação em Par
-*(Relato a ser adicionado)*
+
+A programação em par continuou sendo feita por calls no Discord.
+
+**Dupla 1 — Luísa Magalhães (driver) e Laura Vitória (navigator)**
+Luísa implementou as histórias H7 e H8 com Laura acompanhando pela call. Laura percebeu que o cálculo de adesão estava ignorando os dias em que o paciente não registrou nenhuma refeição, o que distorcia o percentual exibido. As duas também ajustaram a tela de histórico para mostrar as refeições da mais recente para a mais antiga, como estava definido nos cenários da história.
+
+**Dupla 2 — Rebeca Ferraz (driver) e Malu Coelho (navigator)**
+Rebeca trabalhou na configuração do CI/CD com GitHub Actions e Malu foi acompanhando. Durante a call, perceberam juntas que o pipeline estava falhando por causa das credenciais da Azure que precisavam ser configuradas como secrets no repositório. Malu também ajudou a identificar que os testes não estavam sendo executados na ordem certa dentro do workflow, o que foi corrigido na hora.
 
 #### Issue/Bug Tracker
 *(Print a ser adicionado)*
