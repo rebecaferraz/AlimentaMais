@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p /Users/ferraz/Desktop/FDS/AlimentaMais/.github/workflows)"
+    ],
+    "additionalDirectories": [
+      "/Users/ferraz/Desktop/FDS/AlimentaMais/.github"
+    ]
+  }
+}
