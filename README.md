@@ -159,10 +159,10 @@ O pipeline automatiza o build e deploy na Azure a cada push na branch main, incl
 *(Print a ser adicionado)*
 
 #### Quadro da Sprint 04 (JIRA)
-*(Print a ser adicionado)*
+<img src="assets/sprint4.jpeg" width="800">
 
 #### Backlog Atualizado (JIRA)
-*(Print a ser adicionado)*
+<img src="assets/quadrobacklog4.png" width="800">
 
 #### Apresentação Final
 *[Clique aqui para acessar os slides da apresentação](link dos slides)*
