@@ -177,7 +177,11 @@ Rebeca trabalhou na configuração do CI/CD com GitHub Actions e Malu foi acompa
 
 </details>
 
+## Como Contribuir
+Veja o [CONTRIBUTING.md](CONTRIBUTING.md) para instruções de configuração, testes e fluxo de trabalho.
+
 ## Tecnologias
+
 - **Back-end:** Python + Django
 - **Banco de dados:** SQLite (desenvolvimento) / PostgreSQL (produção)
 - **Front-end:** HTML, CSS, JavaScript
