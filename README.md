@@ -15,7 +15,6 @@ Aplicação web para gestão nutricional que conecta nutricionistas e pacientes,
   </tr>
 </table>
 
-
 ## Entregas
 
 <details>
@@ -76,6 +75,7 @@ Luísa trabalhou na view de cadastro de nutricionista (H2) com Laura orientando 
 
 *Print 1: Malu Coelho (teamomuit...) e Rebeca Ferraz (Nyx)*
 *Print 2: Luísa Magalhães (Luísa) e Laura Vitória (La...)*
+
 #### Issue/Bug Tracker (GitHub)
 <img src="assets/issuebugtracker2.png" width="800">
 
@@ -86,9 +86,10 @@ Luísa trabalhou na view de cadastro de nutricionista (H2) com Laura orientando 
 <img src="assets/quadrobacklogatt.png" width="800">
 
 </details>
+
 <details>
 <summary>Entrega 03 | Novas Histórias e Testes</summary>
-  
+
 #### Histórias Implementadas
 - H4: Visualizar Plano Alimentar
 - H5: Registrar Refeição Consumida
@@ -125,6 +126,46 @@ Luísa implementou as histórias H4, H5 e H6 enquanto Laura acompanhava e orient
 
 #### Quadro da Sprint 03 (JIRA)
 <img src="assets/jira333.png" width="800">
+
+</details>
+
+<details>
+<summary>Entrega 04 | Histórias Finais e Apresentação</summary>
+
+#### Histórias Implementadas
+- H7: Visualizar Adesão ao Plano
+- H8: Visualizar Histórico de Refeições
+
+#### Deploy em Produção
+[alimentamais.azurewebsites.net](http://alimentamais.azurewebsites.net)
+
+#### Screencast das Novas Histórias
+*(Link do YouTube a ser adicionado)*
+
+#### CI/CD (GitHub Actions)
+O pipeline automatiza o build e deploy na Azure a cada push na branch main, incluindo a execução dos testes automatizados.
+
+[Clique aqui para acessar o pipeline no GitHub](https://github.com/rebecaferraz/AlimentaMais/actions)
+
+*[Clique aqui para acessar o screencast do CI/CD]()*
+
+#### Testes E2E Atualizados (Selenium)
+*(Link do YouTube a ser adicionado)*
+
+#### Programação em Par
+*(Relato a ser adicionado)*
+
+#### Issue/Bug Tracker
+*(Print a ser adicionado)*
+
+#### Quadro da Sprint 04 (JIRA)
+*(Print a ser adicionado)*
+
+#### Backlog Atualizado (JIRA)
+*(Print a ser adicionado)*
+
+#### Apresentação Final
+*[Clique aqui para acessar os slides da apresentação](link dos slides)*
 
 </details>
 
