@@ -163,7 +163,7 @@ Luísa implementou as histórias H7 e H8 com Laura acompanhando pela call. Laura
 Rebeca trabalhou na configuração do CI/CD com GitHub Actions e Malu foi acompanhando. Durante a call, perceberam juntas que o pipeline estava falhando por causa das credenciais da Azure que precisavam ser configuradas como secrets no repositório. Malu também ajudou a identificar que os testes não estavam sendo executados na ordem certa dentro do workflow, o que foi corrigido na hora.
 
 #### Issue/Bug Tracker
-*(Print a ser adicionado)*
+<img src="assets/issuebugtracker4.png" width="800">
 
 #### Backlog Atualizado (JIRA)
 <img src="assets/sprint4.jpeg" width="800">
