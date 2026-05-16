@@ -629,3 +629,138 @@ class HistoricoRefeicoesTest(TestCase):
         self.assertContains(response, 'Histórico de Refeições')
         self.assertContains(response, self.refeicao1.nome)
         self.assertContains(response, 'Você não registra refeições há 30 dias. Que tal registrar agora?')
+
+ 
+# ---------------------------------------------------------------------------
+# Helpers (mesmo padrão do teste_views.py)
+# ---------------------------------------------------------------------------
+def make_nutri(nome='Dra. Ana', crn='12345-PE', email='ana@nutri.com', senha='senha123'):
+    return Nutricionista.objects.create(nome=nome, crn=crn, email=email, senha=senha)
+ 
+ 
+def make_paciente(nutri=None, nome='Maria Silva', email='maria@cliente.com', senha='senha123'):
+    return Paciente.objects.create(
+        nome=nome, email=email, senha=senha,
+        peso=65.0, altura=1.65, idade=32,
+        objetivo='saude', nutricionista=nutri,
+    )
+ 
+ 
+def make_plano(paciente, nutricionista, ativo=True):
+    return PlanoAlimentar.objects.create(
+        titulo='Plano Teste', paciente=paciente,
+        nutricionista=nutricionista, ativo=ativo,
+    )
+ 
+ 
+def make_refeicao(plano, nome='Café da manhã', dia='seg'):
+    return Refeicao.objects.create(
+        plano=plano, nome=nome,
+        horario='08:00', descricao='Frutas e aveia',
+        dia_semana=dia,
+    )
+ 
+ 
+# =============================================================================
+# H7 — VISUALIZAR ADESÃO AO PLANO (complemento)
+# =============================================================================
+ 
+class H7AdesaoComplementoTest(TestCase):
+    """
+    Completa a cobertura de AdesaoRelatorioTest (pacientes/tests.py).
+    Adiciona o Cenário 2: paciente com plano mas sem nenhum consumo registrado.
+    """
+ 
+    def setUp(self):
+        self.nutri = make_nutri()
+        self.paciente = make_paciente(self.nutri, nome='José Souza', email='jose@cliente.com')
+        self.plano = make_plano(self.paciente, self.nutri)
+        make_refeicao(self.plano)
+ 
+        session = self.client.session
+        session['nutricionista_id'] = self.nutri.id
+        session.save()
+ 
+        self.url = reverse('perfil_paciente', args=[self.paciente.id])
+ 
+    def test_cenario2_paciente_sem_consumos_exibe_sem_dados_adesao(self):
+        """
+        Cenário 2 (Negativo): 'José Souza' tem plano ativo mas nunca registrou
+        nenhuma refeição → sem_dados_adesao=True e mensagem na página.
+        """
+        response = self.client.get(self.url)
+ 
+        self.assertEqual(response.status_code, 200)
+        relatorio = response.context['relatorio_adesao']
+ 
+        self.assertIsNotNone(relatorio['plano'])
+        self.assertTrue(relatorio['sem_dados_adesao'])
+        self.assertEqual(relatorio['total_realizado'], 0)
+        self.assertContains(response, 'Não há dados de adesão disponíveis para este paciente ainda')
+ 
+    def test_cenario3_plano_inativo_tratado_como_sem_plano(self):
+        """
+        Extra: plano com ativo=False não deve ser considerado no relatório,
+        exibindo a mensagem de 'sem plano ativo'.
+        """
+        self.plano.ativo = False
+        self.plano.save()
+ 
+        response = self.client.get(self.url)
+ 
+        relatorio = response.context['relatorio_adesao']
+        self.assertIsNone(relatorio['plano'])
+        self.assertContains(response, 'Este paciente ainda não possui um plano alimentar ativo')
+ 
+ 
+# =============================================================================
+# H8 — VISUALIZAR HISTÓRICO DE REFEIÇÕES (complemento)
+# =============================================================================
+ 
+class H8HistoricoComplementoTest(TestCase):
+    """
+    Completa a cobertura de HistoricoRefeicoesTest (pacientes/tests.py).
+    Adiciona o Cenário 2: paciente sem nenhum registro de refeição.
+    """
+ 
+    def setUp(self):
+        self.nutri = make_nutri()
+        self.paciente = make_paciente(self.nutri, nome='Ana Lima', email='ana@cliente.com')
+        self.plano = make_plano(self.paciente, self.nutri)
+        self.refeicao = make_refeicao(self.plano)
+ 
+        session = self.client.session
+        session['paciente_id'] = self.paciente.id
+        session.save()
+ 
+        self.url = reverse('painel_paciente')
+ 
+    def test_cenario2_historico_vazio_exibe_mensagem(self):
+        """
+        Cenário 2 (Negativo): paciente sem nenhum consumo registrado
+        → mensagem 'Nenhuma refeição registrada ainda...' e sem aviso de 30 dias.
+        """
+        response = self.client.get(self.url)
+ 
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(
+            response,
+            'Nenhuma refeição registrada ainda. Comece registrando sua próxima refeição!',
+        )
+        self.assertFalse(response.context['historico_refeicoes'].exists())
+        self.assertFalse(response.context['historico_aviso'])
+ 
+    def test_cenario3_aviso_nao_exibido_com_registro_recente(self):
+        """
+        Extra: registro de ontem não deve disparar o aviso de 30 dias.
+        """
+        ConsumoRefeicao.objects.create(
+            refeicao=self.refeicao,
+            paciente=self.paciente,
+            data_hora=timezone.now() - timedelta(days=1),
+        )
+ 
+        response = self.client.get(self.url)
+ 
+        self.assertFalse(response.context['historico_aviso'])
+        self.assertNotContains(response, 'Você não registra refeições há 30 dias')
