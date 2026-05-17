@@ -228,6 +228,12 @@
 
     .msg-error   { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
     .msg-success { background: var(--g1); color: var(--g9); border: 1px solid var(--g2); }
+
+    @media (max-width: 640px) {
+      .navbar { padding: 1rem; }
+      .container { padding: 0 1rem 2rem; margin: 1.25rem auto; }
+      .form-row { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>

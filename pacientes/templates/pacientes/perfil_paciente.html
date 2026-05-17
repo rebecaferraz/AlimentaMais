@@ -259,6 +259,15 @@
       font-size: 0.9rem;
       color: var(--muted);
     }
+
+    @media (max-width: 640px) {
+      .navbar { padding: 1rem; }
+      .navbar-actions { gap: .5rem; }
+      .container { padding: 1rem; }
+      .meta-display { flex-wrap: wrap; }
+      .meta-item { min-width: calc(50% - .5rem); }
+      .report-table { display: block; overflow-x: auto; }
+    }
   </style>
 </head>
 <body>

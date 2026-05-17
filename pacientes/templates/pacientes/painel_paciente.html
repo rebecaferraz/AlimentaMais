@@ -354,6 +354,15 @@
     .msg-error   { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
     .msg-success { background: var(--g1); color: var(--g9); border: 1px solid var(--g2); }
     .msg-warning { background: #fefce8; color: #92400e; border: 1px solid #fde68a; }
+
+    @media (max-width: 640px) {
+      .navbar { padding: 1rem; }
+      .navbar-user { gap: .5rem; font-size: .7rem; }
+      .container { padding: 0 1rem; margin: 1.25rem auto; }
+      .refeicoes-grid { grid-template-columns: 1fr; }
+      .history-item { grid-template-columns: 1fr; gap: .25rem; }
+      .history-time { font-size: .75rem; }
+    }
   </style>
 </head>
 <body>
