@@ -147,10 +147,10 @@ O pipeline automatiza o build e deploy na Azure a cada push na branch main, incl
 
 [Clique aqui para acessar o pipeline no GitHub](https://github.com/rebecaferraz/AlimentaMais/actions)
 
-*[Clique aqui para acessar o screencast do CI/CD]()*
+*[Clique aqui para acessar o screencast do CI/CD](https://youtu.be/e5Zx6In3D10)*
 
 #### Testes E2E Atualizados (Selenium)
-*(Link do YouTube a ser adicionado)*
+*[Clique aqui para acessar o screencast do CI/CD](https://youtu.be/4f0lfVxVPS4)*
 
 #### Programação em Par
 
