@@ -183,7 +183,7 @@ Veja o [CONTRIBUTING.md](CONTRIBUTING.md) para instruções de configuração, t
 ## Tecnologias
 
 - **Back-end:** Python + Django
-- **Banco de dados:** SQLite (desenvolvimento) / PostgreSQL (produção)
+- **Banco de dados:** SQLite
 - **Front-end:** HTML, CSS, JavaScript
 - **Deploy:** Azure
 - **Versionamento:** Git + GitHub
