@@ -8,7 +8,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import StaleElementReferenceException
+from selenium.common.exceptions import StaleElementReferenceException, WebDriverException
 from webdriver_manager.chrome import ChromeDriverManager
 from django.utils import timezone
 from django.test import TestCase
@@ -56,7 +56,7 @@ class BaseSeleniumTest(StaticLiveServerTestCase):
 
     def aguardar_texto(self, texto, timeout=25):
         WebDriverWait(self.driver, timeout,
-                      ignored_exceptions=[StaleElementReferenceException]).until(
+                      ignored_exceptions=[StaleElementReferenceException, WebDriverException]).until(
             lambda d: texto in d.find_element(By.TAG_NAME, 'body').text
         )
 
