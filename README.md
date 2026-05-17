@@ -140,7 +140,7 @@ Luísa implementou as histórias H4, H5 e H6 enquanto Laura acompanhava e orient
 [alimentamais.azurewebsites.net](http://alimentamais.azurewebsites.net)
 
 #### Screencast das Novas Histórias
-*(Link do YouTube a ser adicionado)*
+*[Clique aqui para acessar o screencast das Histórias 7 e 8 Implementadas](https://youtu.be/LK-EsOwsfKI)*
 
 #### CI/CD (GitHub Actions)
 O pipeline automatiza o build e deploy na Azure a cada push na branch main, incluindo a execução dos testes automatizados.
