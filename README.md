@@ -173,7 +173,7 @@ Rebeca trabalhou na configuração do CI/CD com GitHub Actions e Malu foi acompa
 
 
 #### Apresentação Final
-*[Clique aqui para acessar os slides da apresentação](link dos slides)*
+*[Clique aqui para acessar os slides da apresentação](https://canva.link/vbl0eeuwd6es9cd)*
 
 </details>
 
