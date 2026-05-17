@@ -334,9 +334,19 @@
     .tipo-btn.active .tipo-label { color: var(--g9); }
 
     @media (max-width: 640px) {
-      .page { grid-template-columns: 1fr; }
-      .left { display: none; }
-      .right { padding: 2rem 1.25rem; align-items: flex-start; padding-top: 3rem; }
+      .page { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+      .left {
+        padding: 1.5rem 1.5rem;
+        justify-content: flex-start;
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
+      }
+      .left::before, .left::after { display: none; }
+      .logo-img { width: 40px; height: 40px; margin-bottom: 0; }
+      .brand-name { font-size: 1.2rem; margin-bottom: 0; }
+      .gold-line, .brand-tagline, .features { display: none; }
+      .right { padding: 1.75rem 1.25rem; align-items: flex-start; }
       .card { padding: 1.75rem 1.25rem; }
       .form-row { grid-template-columns: 1fr; }
     }
