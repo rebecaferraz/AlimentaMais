@@ -606,8 +606,8 @@ class HistoricoRefeicoesTest(TestCase):
         content = response.content.decode('utf-8')
         history_section = content.split('Histórico de Refeições', 1)[1]
         self.assertTrue(history_section.index(self.refeicao2.nome) < history_section.index(self.refeicao1.nome))
-        self.assertContains(response, registro_recente.data_hora.strftime('%d/%m/%Y'))
-        self.assertContains(response, registro_antigo.data_hora.strftime('%d/%m/%Y'))
+        self.assertContains(response, timezone.localtime(registro_recente.data_hora).strftime('%d/%m/%Y'))
+        self.assertContains(response, timezone.localtime(registro_antigo.data_hora).strftime('%d/%m/%Y'))
         self.assertContains(response, 'Registrado às')
 
     def test_historico_sem_registros_ha_mais_de_30_dias_exibe_aviso(self):
