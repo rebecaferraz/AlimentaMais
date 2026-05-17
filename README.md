@@ -150,7 +150,7 @@ O pipeline automatiza o build e deploy na Azure a cada push na branch main, incl
 *[Clique aqui para acessar o screencast do CI/CD](https://youtu.be/e5Zx6In3D10)*
 
 #### Testes E2E Atualizados (Selenium)
-*[Clique aqui para acessar o screencast do CI/CD](https://youtu.be/4f0lfVxVPS4)*
+*[Clique aqui para acessar o screencast dos Testes E2E atualizados](https://youtu.be/4f0lfVxVPS4)*
 
 #### Programação em Par
 
